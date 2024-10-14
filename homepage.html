@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="homepage_style.css">
+    <title>Study Website</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to StudySage</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#resources">Study Resources</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="timer-section">
+            <h2>Study Timer</h2>
+            <div id="timer">00:00:00</div>
+            <button id="selectTimerBtn">Select Timer</button>
+            <button id="startBtn">Start</button>
+            <button id="pauseBtn">Pause</button>
+            <button id="resetBtn">Reset</button>
+        </section>
+
+        <!-- The Modal -->
+        <div id="timerModal" class="modal">
+            <div class="modal-content">
+                <h3>Select Starting Time</h3>
+                
+                <div class="time-selector">
+                    <div class="time-item" id="minuteDisplay">00</div>
+                    <span>:</span>
+                    <div class="time-item" id="secondDisplay">00</div>
+                </div>
+                
+                <!-- Add buttons container -->
+                <div class="button-container">
+                    <button id="setTimerBtn">Set Timer</button>
+                    <button id="closeModalBtn">Close</button> <!-- New close button -->
+                </div>
+            </div>
+        </div>
+
+        <section id="study-info">
+            <h2>Your Study Sessions</h2>
+            <p>Track your study sessions using the timer above.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 StudyMate. All rights reserved.</p>
+    </footer>
+    <script src="homepage_script.js"></script>
+</body>
+</html>
