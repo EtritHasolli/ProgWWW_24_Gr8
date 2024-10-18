@@ -3,10 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyMate</title>
+    <link rel="stylesheet" href="study_style.css">
+    <title>Study Methods</title>
 </head>
 
 <body>
-    
+    <header>
+        <h1>StudyMate</h1>
+        <nav>
+            <ul>
+                <li><a href="homepage.html">Home</a></li>
+                <li><a href="study_meth.html#methods">Study Methods</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="book_pages">
+
+        <div class="background1"></div>
+        <div class="background_pages1"></div>
+        <!-- Page 1 -->
+        <div class="page" id="page-1">
+            <h2>Study Method 1</h2>
+            <p>Cornell Notes: A note-taking system that involves dividing your notes into cues, notes, and summary sections.</p>
+        </div>
+        <!-- Page 2 -->
+        <div class="page" id="page-2">
+            <h2>Study Method 2</h2>
+            <p>Focused Notes: A method where you take highly focused notes on key concepts to reinforce understanding.</p>
+        </div>
+        
+        <!-- Page 3 -->
+        <div class="page" id="page-3">
+            <h2>Study Method 3</h2>
+            <p>Flash Cards: A method of reviewing information by writing questions on one side and answers on the other.</p>
+        </div>
+        <!-- Page 4 -->
+        <div class="page" id="page-4">
+            <h2>Study Method 4</h2>
+            <p>Blurting: Writing everything you know about a topic to identify knowledge gaps and improve recall.</p>
+        </div>
+        
+        <!-- Page 5 -->
+        <div class="page" id="page-5">
+            <h2>Study Method 5</h2>
+            <p>Spaced Repetition: Reviewing material at increasing intervals to boost long-term memory retention.</p>
+        </div>
+        <!-- Page 6 -->
+        <div class="page" id="page-6">
+            <h2>Study Method 6</h2>
+            <p>Feynman Technique: Simplifying complex concepts by explaining them in simple language.</p>
+        </div>
+        
+        <!-- Page 7 -->
+        <div class="page" id="page-7">
+            <h2>Study Method 7</h2>
+            <p>Power Nap: A short 10-20 minute nap that boosts energy and cognitive function.</p>
+        </div>
+        <!-- Page 8 -->
+        <div class="page" id="page-8">
+            <h2>Study Method 8</h2>
+            <p>Second Brain: Organizing information externally to free up mental space and improve retention.</p>
+        </div>
+        
+        <!-- Page 9 -->
+        <div class="page" id="page-9">
+            <h2>Study Method 9</h2>
+            <p>Time Blocking: Dividing your day into blocks of focused study time and rest.</p>
+        </div>
+        <!-- Page 10 -->
+        <div class="page" id="page-10">
+            <h2>Study Method 10</h2>
+            <p>Socratic Method: Asking and answering questions to stimulate critical thinking and understanding.</p>
+        </div>
+        
+        <!-- Page 11 -->
+        <div class="page" id="page-11">
+            <h2>Study Method 11</h2>
+            <p>Active Recall: Testing your knowledge by recalling information without looking at your notes.</p>
+        </div>
+        <!-- Page 12 -->
+        <div class="page" id="page-12">
+            <h2>Study Method 12</h2>
+            <p>SQ3R Method: A reading comprehension method involving Survey, Question, Read, Recite, Review.</p>
+        </div>
+        <div class="background_pages"></div>
+        <div class="background"></div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="navigation">
+        <button id="prev" onclick="prevPage()">Previous</button>
+        <button id="next" onclick="nextPage()">Next</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 StudyMate. All rights reserved.</p>
+    </footer>
+
+    <script src="study_script.js"></script>
 </body>
 </html>

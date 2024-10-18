@@ -1,0 +1,170 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #004a2f;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 30px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: large;
+}
+
+.book_pages {
+    width: 600px;  /* Double the width for two pages */
+    height: 400px;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    background: white;
+}
+
+.page {
+    width: 50%;  /* Each page takes up half of the book space */
+    height: 100%;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid black;
+    display: none;
+    transition: transform 0.6s;
+}
+
+.page:last-child {
+    border-right: none;  /* No border on the last page (right side) */
+}
+
+.page.active {
+    display: block;  /* Display active pages */
+}
+
+.navigation {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+}
+
+.page p {
+    margin-top: 20px;
+}
+
+.background_pages {
+    width: 1px;  /* Each page takes up half of the book space */
+    height: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 0 3px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    transition: transform 0.6s;
+    border: black;
+    /* border-right: 1px solid black; */
+}
+
+.background_pages1 {
+    width: 1px;  /* Each page takes up half of the book space */
+    height: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 0 3px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    transition: transform 0.6s;
+    border: black;
+    border-right: 1px solid black;
+}
+
+.background1 {
+    width: 1px;  /* Each page takes up half of the book space */
+    height: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 0 3px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    transition: transform 0.6s;
+    border: black;
+    border-right: 1px solid black;
+}
+
+.background {
+    width: 1px;  /* Each page takes up half of the book space */
+    height: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 0 3px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    transition: transform 0.6s;
+    border: black;
+    border-left: 1px solid black;
+}
