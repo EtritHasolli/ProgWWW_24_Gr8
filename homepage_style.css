@@ -5,38 +5,34 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #dfd4b7;
-    color: #333;
-    line-height: 1.6;
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Full viewport height */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
 }
 
 header {
-    background-color: #2a6535;
+    background-color: #004a2f;
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
-    /* padding: 20px 0; */
-    /* text-align: center; */
-}
-
-.website_name {
-    margin-left: 20px;
-    margin-top: 4px;
-}
-
-.nav_bar {
-    margin-right: 10px;
+    padding: 10px 20px;
 }
 
 header h1 {
-    margin-bottom: 10px;
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* font-style: italic; */
 }
 
 nav ul {
@@ -47,24 +43,34 @@ nav ul {
 }
 
 nav ul li {
-    margin: 0 20px;
+    margin: 0 30px;
 }
 
 nav ul li a {
     color: white;
     text-decoration: none;
     font-weight: bold;
+    font-size: large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 nav ul li a:hover {
-    text-decoration: underline;
+    text-decoration: wavy;
 }
 
 main {
+    flex-grow: 1; /* Allows the main content to take up remaining space */
     padding: 20px;
     max-width: 900px;
     margin: 0 auto;
-    flex: 1; /* Makes the main content grow to fill available space */
+    display: flex;
+    flex-direction: column;
+    margin-top: 90px;
+}
+
+#study-info {
+    margin-top: auto;
+    text-align: center;
 }
 
 #timer-section {
@@ -79,11 +85,11 @@ main {
     font-size: 3rem;
     font-weight: bold;
     margin: 20px 0;
-    color: #102820;
+    color: #379956;
 }
 
 button {
-    background-color: #4C6444;
+    background-color: #379956;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -95,22 +101,16 @@ button {
 }
 
 button:hover {
-    background-color: #1E5128;
+    background-color: #379956;
 }
 
-#study-info {
-    margin-top: 60px;
-    text-align: center;
-}
-
-/* Footer styling */
+/* Footer styles */
 footer {
     background-color: #333;
     color: white;
     padding: 10px 0;
     text-align: center;
     width: 100%;
-    margin-top: auto; /* Pushes the footer to the bottom */
 }
 
 footer p {
@@ -119,27 +119,26 @@ footer p {
 
 /* Modal Styles */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top */
+    display: none;
+    position: fixed;
+    z-index: 1000;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    background-color: rgba(0, 0, 0, 0.5); /* Black background with transparency */
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* Modal content styling */
 .modal-content {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
     width: 300px;
-    position: absolute; /* Position it in the center */
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Offset by half of its width/height */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .time-selector {
@@ -160,16 +159,12 @@ footer p {
     background-color: #f0f0f0;
 }
 
-.timer {
-    margin-top: 50px;
-}
-
 .button-container {
-    display: flex; /* Use flexbox for horizontal alignment */
-    justify-content: center; /* Center the buttons */
-    margin-top: 20px; /* Add some space above the buttons */
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 .button-container button {
-    margin: 0 10px; /* Add space between the buttons */
+    margin: 0 10px;
 }
