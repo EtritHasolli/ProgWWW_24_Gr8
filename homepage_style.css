@@ -84,7 +84,7 @@ main {
 #timer {
     font-size: 3rem;
     font-weight: bold;
-    margin: 20px 0;
+    margin: 23px 0;
     color: #379956;
 }
 
@@ -167,4 +167,38 @@ footer p {
 
 .button-container button {
     margin: 0 10px;
+}
+
+.transTime {
+    display: flex;
+    flex-direction: column;
+}
+
+.pre-time, .post-time {
+    opacity: 0.3;
+    margin-top: -20px;
+    margin-bottom: -20px;
+}
+
+#playPauseBtn {
+    font-size: 14px; /* Increase font size for better visibility */
+    font-weight: 600;
+    padding: 10px 20px;
+    background-color: #379956;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+    outline: none;
+    height: fit-content;
+}
+
+#playPauseBtn:hover {
+    background-color: #135e2b;
+}
+
+.pauseAndTimer {
+    display: flex;
+    flex-direction: row;
+    margin-left: 14%;
+    align-items: center;
 }

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="homepage_style.css">
     <title>Study Website</title>
 </head>
@@ -21,22 +22,38 @@
     <main>
         <section id="timer-section">
             <h2>Study Timer</h2>
+            <div class="pauseAndTimer">
+            <button id="playPauseBtn" style="display: flex;";><i class="fa fa-play" aria-hidden="true"></i></button> <!-- Default to play -->
             <div id="timer">00:00:00</div>
+            </div>
             <button id="selectTimerBtn">Select Timer</button>
             <button id="startBtn">Start</button>
             <button id="pauseBtn">Pause</button>
             <button id="resetBtn">Reset</button>
         </section>
-
         <!-- The Modal -->
         <div id="timerModal" class="modal">
             <div class="modal-content">
                 <h3>Select Starting Time</h3>
                 
                 <div class="time-selector">
-                    <div class="time-item" id="minuteDisplay">00</div>
+                    <div class="transTime">
+                        <div class="pre-time" id="preHour">00</div>
+                        <div class="time-item" id="hourDisplay">00</div>
+                        <div class="post-time" id="postHour">00</div>
+                    </div>
                     <span>:</span>
-                    <div class="time-item" id="secondDisplay">00</div>
+                    <div class="transTime">
+                        <div class="pre-time" id="preMinute">00</div>
+                        <div class="time-item" id="minuteDisplay">00</div>
+                        <div class="post-time" id="postMinute">00</div>
+                    </div>
+                    <span>:</span>
+                    <div class="transTime">
+                        <div class="pre-time" id="preSecond">00</div>
+                        <div class="time-item" id="secondDisplay">00</div>
+                        <div class="post-time" id="postSecond">00</div>
+                    </div>
                 </div>
                 
                 <!-- Add buttons container -->
