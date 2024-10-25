@@ -1,10 +1,10 @@
-let timer;
-let totalSeconds = 0;
-let isRunning = false;
-let initialSeconds = 0; // Store the initially set time
-let selectedHours = 0;
-let selectedMinutes = 0;
-let selectedSeconds = 0;
+let studyTimer, breakTimer;
+let totalStudySeconds = 0;
+let totalBreakSeconds = 0;
+let isStudyRunning = false;
+let isBreakRunning = false;
+let initialStudySeconds = 0;
+let initialBreakSeconds = 0;
 
 let hoursBefore = 0;
 let minutesBefore = 0;
@@ -14,82 +14,119 @@ let hoursAfter = 0;
 let minutesAfter = 0;
 let secondsAfter = 0;
 
-// Modal functionality
-const modal = document.getElementById('timerModal');
-const selectTimerBtn = document.getElementById('selectTimerBtn');
-const setTimerBtn = document.getElementById('setTimerBtn');
+let selectedHours = 0;
+let selectedMinutes = 0;
+let selectedSeconds = 0;
+
+let selectedBreakHours = 0;
+let selectedBreakMinutes = 0;
+let selectedBreakSeconds = 0;
+
+//hours display
 const hourDisplay = document.getElementById('hourDisplay');
 const minuteDisplay = document.getElementById('minuteDisplay');
 const secondDisplay = document.getElementById('secondDisplay');
+
+//break time display
+const breakHourDisplay = document.getElementById('breakHourDisplay');
+const breakMinuteDisplay = document.getElementById('breakMinuteDisplay');
+const breakSecondDisplay = document.getElementById('breakSecondDisplay');
 
 // The numbers on top of the actual time
 const preHour = document.getElementById('preHour');
 const preMinute = document.getElementById('preMinute');
 const preSecond = document.getElementById('preSecond');
 
+//The numers on top of the break time
+const preBreakHour = document.getElementById('preBreakHour');
+const preBreakMinute = document.getElementById('preBreakMinute');
+const preBreakSecond = document.getElementById('preBreakSecond');
+
 // The numbers under the actual time
 const postHour = document.getElementById('postHour');
 const postMinute = document.getElementById('postMinute');
 const postSecond = document.getElementById('postSecond');
 
-// Open modal when "Select Timer" is clicked
-selectTimerBtn.onclick = function() {
-    modal.style.display = 'flex'; // Display the modal
+//The numers under the break timer
+const postBreakHour = document.getElementById('postBreakHour');
+const postBreakMinute = document.getElementById('postBreakMinute');
+const postBreakSecond = document.getElementById('postBreakSecond');
+
+// Modal functionality
+const modal = document.getElementById('timerModal');
+const bModal = document.getElementById('breakModal');
+
+const selectTimerBtn = document.getElementById('selectTimerBtn');
+const selectBreakBtn = document.getElementById('breakSelect');
+
+const setTimerBtn = document.getElementById('setTimerBtn');
+const setBreakTimer = document.getElementById('setBreakTimer');
+
+// The play/pause button and icon
+const studyBtn = document.getElementById('studyBtn');
+const studyIcon = document.getElementById('studyIcon');
+
+const breakBtn = document.getElementById('breakBtn');
+const breakIcon = document.getElementById('breakIcon');
+
+// Open modals when "Select Timer" or "Select Break" is clicked
+selectTimerBtn.onclick = () => (modal.style.display = 'flex');
+selectBreakBtn.onclick = () => (bModal.style.display = 'flex');
+
+// Close modals
+document.getElementById('closeModalBtn').onclick = () => (modal.style.display = 'none');
+document.getElementById('closeBreakModal').onclick = () => (bModal.style.display = 'none');
+
+// Helper to handle clicks outside modals
+window.onclick = (event) => {
+    if (event.target === modal) modal.style.display = 'none';
+    if (event.target === bModal) bModal.style.display = 'none';
 };
 
-// Close modal when the 'Close' button is clicked
-const closeModalBtn = document.getElementById('closeModalBtn');
-closeModalBtn.onclick = function() {
-    modal.style.display = 'none'; // Hide the modal
-};
-
-// Close modal when clicking outside the modal
-window.onclick = function(event) {
-    if (event.target === modal) {
-        modal.style.display = 'none'; // Hide the modal
-    }
-};
-
-// Function to handle scrollable selection with variable speed
-function startScroll(event, unit) {
-    event.preventDefault(); // Prevent default drag behavior
+// Function to handle scrollable selection with variable speed for both timers
+function startScroll(event, unit, timerType) {
+    event.preventDefault();
     const initialY = event.clientY;
     let lastY = initialY;
-    const speedFactor = -2; // Adjust this to increase/decrease sensitivity
+    const speedFactor = -2;
 
     const updateValue = (deltaY) => {
         const steps = Math.floor(Math.abs(deltaY) / speedFactor);
 
-        if (unit === 'hours') {
-            // Update hours
-            selectedHours = (selectedHours + Math.sign(deltaY) * steps + 24) % 24; // Wrap around at 24
-            hourDisplay.textContent = selectedHours.toString().padStart(2, '0');
-            
-            hoursBefore = (selectedHours - 1 + 24) % 24;
-            preHour.textContent = hoursBefore.toString().padStart(2, '0');
-
-            hoursAfter = (selectedHours + 1) % 24;
-            postHour.textContent = hoursAfter.toString().padStart(2, '0');
-        } else if (unit === 'minutes') {
-            // Update minutes
-            selectedMinutes = (selectedMinutes + Math.sign(deltaY) * steps + 60) % 60;
-            minuteDisplay.textContent = selectedMinutes.toString().padStart(2, '0');
-
-            minutesBefore = (selectedMinutes - 1 + 60) % 60;
-            preMinute.textContent = minutesBefore.toString().padStart(2, '0');
-
-            minutesAfter = (selectedMinutes + 1) % 60;
-            postMinute.textContent = minutesAfter.toString().padStart(2, '0');
-        } else {
-            // Update seconds
-            selectedSeconds = (selectedSeconds + Math.sign(deltaY) * steps + 60) % 60;
-            secondDisplay.textContent = selectedSeconds.toString().padStart(2, '0');
-
-            secondsBefore = (selectedSeconds - 1 + 60) % 60;
-            preSecond.textContent = secondsBefore.toString().padStart(2, '0');
-
-            secondsAfter = (selectedSeconds + 1) % 60;
-            postSecond.textContent = secondsAfter.toString().padStart(2, '0');
+        if (timerType === 'study') {
+            if (unit === 'hours') {
+                selectedHours = (selectedHours + Math.sign(deltaY) * steps + 24) % 24;
+                hourDisplay.textContent = selectedHours.toString().padStart(2, '0');
+                preHour.textContent = ((selectedHours - 1 + 24) % 24).toString().padStart(2, '0');
+                postHour.textContent = ((selectedHours + 1) % 24).toString().padStart(2, '0');
+            } else if (unit === 'minutes') {
+                selectedMinutes = (selectedMinutes + Math.sign(deltaY) * steps + 60) % 60;
+                minuteDisplay.textContent = selectedMinutes.toString().padStart(2, '0');
+                preMinute.textContent = ((selectedMinutes - 1 + 60) % 60).toString().padStart(2, '0');
+                postMinute.textContent = ((selectedMinutes + 1) % 60).toString().padStart(2, '0');
+            } else {
+                selectedSeconds = (selectedSeconds + Math.sign(deltaY) * steps + 60) % 60;
+                secondDisplay.textContent = selectedSeconds.toString().padStart(2, '0');
+                preSecond.textContent = ((selectedSeconds - 1 + 60) % 60).toString().padStart(2, '0');
+                postSecond.textContent = ((selectedSeconds + 1) % 60).toString().padStart(2, '0');
+            }
+        } else if (timerType === 'break') {
+            if (unit === 'hours') {
+                selectedBreakHours = (selectedBreakHours + Math.sign(deltaY) * steps + 24) % 24;
+                breakHourDisplay.textContent = selectedBreakHours.toString().padStart(2, '0');
+                preBreakHour.textContent = ((selectedBreakHours - 1 + 24) % 24).toString().padStart(2, '0');
+                postBreakHour.textContent = ((selectedBreakHours + 1) % 24).toString().padStart(2, '0');
+            } else if (unit === 'minutes') {
+                selectedBreakMinutes = (selectedBreakMinutes + Math.sign(deltaY) * steps + 60) % 60;
+                breakMinuteDisplay.textContent = selectedBreakMinutes.toString().padStart(2, '0');
+                preBreakMinute.textContent = ((selectedBreakMinutes - 1 + 60) % 60).toString().padStart(2, '0');
+                postBreakMinute.textContent = ((selectedBreakMinutes + 1) % 60).toString().padStart(2, '0');
+            } else {
+                selectedBreakSeconds = (selectedBreakSeconds + Math.sign(deltaY) * steps + 60) % 60;
+                breakSecondDisplay.textContent = selectedBreakSeconds.toString().padStart(2, '0');
+                preBreakSecond.textContent = ((selectedBreakSeconds - 1 + 60) % 60).toString().padStart(2, '0');
+                postBreakSecond.textContent = ((selectedBreakSeconds + 1) % 60).toString().padStart(2, '0');
+            }
         }
     };
 
@@ -108,10 +145,16 @@ function startScroll(event, unit) {
     document.addEventListener('mouseup', stopScroll);
 }
 
-// Add event listeners to hour, minute, and second displays
-hourDisplay.addEventListener('mousedown', (event) => startScroll(event, 'hours'));
-minuteDisplay.addEventListener('mousedown', (event) => startScroll(event, 'minutes'));
-secondDisplay.addEventListener('mousedown', (event) => startScroll(event, 'seconds'));
+// Study timer event listeners
+document.getElementById('hourDisplay').addEventListener('mousedown', (event) => startScroll(event, 'hours', 'study'));
+document.getElementById('minuteDisplay').addEventListener('mousedown', (event) => startScroll(event, 'minutes', 'study'));
+document.getElementById('secondDisplay').addEventListener('mousedown', (event) => startScroll(event, 'seconds', 'study'));
+
+// Break timer event listeners
+document.getElementById('breakHourDisplay').addEventListener('mousedown', (event) => startScroll(event, 'hours', 'break'));
+document.getElementById('breakMinuteDisplay').addEventListener('mousedown', (event) => startScroll(event, 'minutes', 'break'));
+document.getElementById('breakSecondDisplay').addEventListener('mousedown', (event) => startScroll(event, 'seconds', 'break'));
+
 
 // Set the timer based on user input from the modal
 setTimerBtn.onclick = function() {
@@ -126,51 +169,99 @@ setTimerBtn.onclick = function() {
     modal.style.display = 'none'; // Close the modal
 };
 
-// Start the timer countdown
-document.getElementById('startBtn').onclick = function() {
-    if (!isRunning && totalSeconds > 0) {
-        isRunning = true;
-        timer = setInterval(() => {
-            if (totalSeconds > 0) {
-                totalSeconds--;
-                document.getElementById('timer').textContent = formatTime(totalSeconds);
+// Set study timer from modal input
+setTimerBtn.onclick = function () {
+    initialStudySeconds = totalStudySeconds = selectedHours * 3600 + selectedMinutes * 60 + selectedSeconds;
+    document.getElementById('timer').textContent = formatTime(totalStudySeconds);
+    modal.style.display = 'none';
+};
+
+// Set break timer from modal input
+setBreakTimer.onclick = function () {
+    initialBreakSeconds = totalBreakSeconds = selectedBreakHours * 3600 + selectedBreakMinutes * 60 + selectedBreakSeconds;
+    document.getElementById('break').textContent = formatTime(totalBreakSeconds);
+    bModal.style.display = 'none';
+};
+
+// Play/pause functionality for the study timer
+studyBtn.addEventListener('click', () => {
+    if (studyIcon.classList.contains('fa-play')) {
+        studyIcon.classList.replace('fa-play', 'fa-pause');
+        startStudyTimer();
+    } else {
+        studyIcon.classList.replace('fa-pause', 'fa-play');
+        pauseStudyTimer();
+    }
+});
+
+// Play/pause functionality for the break timer
+breakBtn.addEventListener('click', () => {
+    if (breakIcon.classList.contains('fa-play')) {
+        breakIcon.classList.replace('fa-play', 'fa-pause');
+        startBreakTimer();
+    } else {
+        breakIcon.classList.replace('fa-pause', 'fa-play');
+        pauseBreakTimer();
+    }
+});
+
+// Start study timer countdown
+function startStudyTimer() {
+    if (!isStudyRunning && totalStudySeconds > 0) {
+        isStudyRunning = true;
+        studyTimer = setInterval(() => {
+            if (totalStudySeconds > 0) {
+                totalStudySeconds--;
+                document.getElementById('timer').textContent = formatTime(totalStudySeconds);
             } else {
-                pauseTimer();
+                pauseStudyTimer();
             }
         }, 1000);
-
-        // Hide "Paused" message when timer starts
-        document.getElementById('pausedMessage').style.display = 'none';
-        document.getElementById('timer').style.marginTop = '23px';
     }
+}
+
+// Start break timer countdown
+function startBreakTimer() {
+    if (!isBreakRunning && totalBreakSeconds > 0) {
+        isBreakRunning = true;
+        breakTimer = setInterval(() => {
+            if (totalBreakSeconds > 0) {
+                totalBreakSeconds--;
+                document.getElementById('break').textContent = formatTime(totalBreakSeconds);
+            } else {
+                pauseBreakTimer();
+            }
+        }, 1000);
+    }
+}
+
+// Reset button for both timers
+document.getElementById('resetBtn').onclick = function () {
+    // Reset study timer
+    isStudyRunning = false;
+    clearInterval(studyTimer);
+    totalStudySeconds = initialStudySeconds;
+    document.getElementById('timer').textContent = formatTime(totalStudySeconds);
+    playPauseBtn.classList.replace('fa-pause', 'fa-play');
+
+    // Reset break timer
+    isBreakRunning = false;
+    clearInterval(breakTimer);
+    totalBreakSeconds = initialBreakSeconds;
+    document.getElementById('break').textContent = formatTime(totalBreakSeconds);
+    breakPlayPauseBtn.classList.replace('fa-pause', 'fa-play');
 };
 
-// Pause the timer
-document.getElementById('pauseBtn').onclick = function() {
-    pauseTimer();
-    document.getElementById('pausedMessage').style.display = 'flex'; // Show "Paused" message
-    document.getElementById('pausedMessage').style.justifyContent = 'center';
-    document.getElementById('pausedMessage').style.margin = '3px';
-    document.getElementById('timer').style.marginTop = '-3px';
-};
+// Pause the study timer
+function pauseStudyTimer() {
+    isStudyRunning = false;
+    clearInterval(studyTimer);
+}
 
-// Reset the timer to the initially selected value
-document.getElementById('resetBtn').onclick = function() {
-    isRunning = false;
-    clearInterval(timer);
-    totalSeconds = initialSeconds; // Reset to initial time
-    document.getElementById('timer').textContent = formatTime(totalSeconds);
-
-    // Hide "Paused" message
-    document.getElementById('pausedMessage').style.display = 'none';
-    document.getElementById('pausedMessage').style.marginBottom = '3px';
-    document.getElementById('timer').style.marginTop = '23px';
-};
-
-// Helper function to pause the timer
-function pauseTimer() {
-    isRunning = false;
-    clearInterval(timer);
+// Pause the break timer
+function pauseBreakTimer() {
+    isBreakRunning = false;
+    clearInterval(breakTimer);
 }
 
 // Format time in HH:MM:SS format

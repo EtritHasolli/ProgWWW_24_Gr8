@@ -23,18 +23,25 @@
         <section id="timer-section">
             <h2>Study Timer</h2>
             <div class="pauseAndTimer">
-            <button id="playPauseBtn" style="display: flex;";><i class="fa fa-play" aria-hidden="true"></i></button> <!-- Default to play -->
+            <button id="studyBtn" style="display: flex;"><i id="studyIcon" class="fa fa-play" aria-hidden="true"></i></button> <!-- Default to play -->
             <div id="timer">00:00:00</div>
             </div>
+            <h2>Break Timer</h2>
+            <div class="breakTimer">
+                <button id="breakBtn" style="display: flex;"><i id="breakIcon" class="fa fa-play" aria-hidden="true"></i></button>
+                <div id="break">00:00:00</div>
+            </div>            
             <button id="selectTimerBtn">Select Timer</button>
-            <button id="startBtn">Start</button>
-            <button id="pauseBtn">Pause</button>
+            <!-- <button id="startBtn">Start</button>
+            <button id="pauseBtn">Pause</button> -->
+            <button id="breakSelect">Select Break</button>
             <button id="resetBtn">Reset</button>
         </section>
+
         <!-- The Modal -->
         <div id="timerModal" class="modal">
             <div class="modal-content">
-                <h3>Select Starting Time</h3>
+                <h3>Select Study Time</h3>
                 
                 <div class="time-selector">
                     <div class="transTime">
@@ -60,6 +67,39 @@
                 <div class="button-container">
                     <button id="setTimerBtn">Set Timer</button>
                     <button id="closeModalBtn">Close</button> <!-- Close button -->
+                </div>
+            </div>
+        </div>
+
+        <!-- The Break Modal -->
+        <div id="breakModal" class="bModal">
+            <div class="bModal-content">
+                <h3>Select Break Time</h3>
+                
+                <div class="bTime-selector">
+                    <div class="bTransTime">
+                        <div class="pre-break" id="preBreakHour">00</div>
+                        <div class="bTime-item" id="breakHourDisplay">00</div>
+                        <div class="post-break" id="postBreakHour">00</div>
+                    </div>
+                    <span>:</span>
+                    <div class="bTransTime">
+                        <div class="pre-break" id="preBreakMinute">00</div>
+                        <div class="bTime-item" id="breakMinuteDisplay">00</div>
+                        <div class="post-break" id="postBreakMinute">00</div>
+                    </div>
+                    <span>:</span>
+                    <div class="bTransTime">
+                        <div class="pre-break" id="preBreakSecond">00</div>
+                        <div class="bTime-item" id="breakSecondDisplay">00</div>
+                        <div class="post-break" id="postBreakSecond">00</div>
+                    </div>
+                </div>
+                
+                <!-- Add buttons container -->
+                <div class="button-container">
+                    <button id="setBreakTimer">Set Break</button>
+                    <button id="closeBreakModal">Close</button> <!-- Close button -->
                 </div>
             </div>
         </div>
