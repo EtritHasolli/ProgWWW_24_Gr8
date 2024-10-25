@@ -7,18 +7,8 @@
     <link rel="stylesheet" href="homepage_style.css">
     <title>Study Website</title>
 </head>
-<body>
-    <header>
-        <h1>StudyMate</h1>
-        <nav>
-            <ul>
-                <li><a href="homepage.html">Home</a></li>
-                <li><a href="study_meth.html#methods">Study Methods</a></li>
-                <li><a href="#about">About</a></li>
-            </ul>
-        </nav>
-    </header>
-
+<body onload="loadHeader(), loadFooter()">
+    <div id="header"></div>
     <main>
         <section id="timer-section">
             <h2>Study Timer</h2>
@@ -110,9 +100,8 @@
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 StudyMate. All rights reserved.</p>
-    </footer>
+    <div id="footer"></div>
     <script src="homepage_script.js"></script>
+    <script src="header_load.js"></script>
 </body>
 </html>

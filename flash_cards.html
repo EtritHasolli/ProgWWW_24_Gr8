@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="flash_cards_style.css">
+    <title>Flash Cards</title>
+</head>
+<body onload="loadHeader(); loadFooter(); loadCards()">
+    <!-- Header Section -->
+    <div id="header"></div>
+
+    <main>
+        <!-- Flash Card Input Form -->
+        <div id="add-card-form">
+            <input type="text" id="question" placeholder="Enter your question" required>
+            <input type="text" id="answer" placeholder="Enter your answer" required>
+            <button onclick="addFlashCard()">Add Flash Card</button>
+        </div>     
+
+        <!-- Flashcard Table -->
+        <div class="table-container">
+            <table>
+                <tr>
+                </tr>
+            </table>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <div id="footer"></div>
+
+</body>
+
+<script src="flash_cards.js"></script>
+</html>

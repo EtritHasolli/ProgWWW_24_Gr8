@@ -1,51 +1,3 @@
-/* Basic Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    height: 100vh;
-    background-color: #f4f4f4;
-}
-
-header {
-    background-color: #004a2f;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    padding: 0;
-}
-
-nav ul li {
-    margin: 0 30px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: large;
-}
-
 .book_pages {
     width: 600px;  /* Double the width for two pages */
     height: 400px;
@@ -73,7 +25,18 @@ nav ul li a {
 }
 
 .page.active {
-    display: block;  /* Display active pages */
+    display: flex;  /* Display active pages */
+    flex-direction: column;
+    align-items: center;
+}
+
+.page a {
+    height: initial;
+    margin-top: auto;
+}
+
+.page p {
+    margin-top: 20px;
 }
 
 .navigation {
@@ -95,18 +58,6 @@ button {
 
 button:hover {
     background-color: #555;
-}
-
-footer {
-    background-color: #333;
-    color: white;
-    padding: 10px 0;
-    text-align: center;
-    width: 100%;
-}
-
-.page p {
-    margin-top: 20px;
 }
 
 .background_pages {

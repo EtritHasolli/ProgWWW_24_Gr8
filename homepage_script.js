@@ -211,9 +211,11 @@ function startStudyTimer() {
         isStudyRunning = true;
         studyTimer = setInterval(() => {
             if (totalStudySeconds > 0) {
+                pauseBreakTimer(); // Pause break timer if running
                 totalStudySeconds--;
                 document.getElementById('timer').textContent = formatTime(totalStudySeconds);
             } else {
+                startBreakTimer(); // Automatically start break timer when study time is up
                 pauseStudyTimer();
             }
         }, 1000);
@@ -226,10 +228,13 @@ function startBreakTimer() {
         isBreakRunning = true;
         breakTimer = setInterval(() => {
             if (totalBreakSeconds > 0) {
+                if(breakIcon.classList.contains('fa-play')) {
+                    breakIcon.classList.replace('fa-play', 'fa-pause');
+                }
                 totalBreakSeconds--;
                 document.getElementById('break').textContent = formatTime(totalBreakSeconds);
             } else {
-                pauseBreakTimer();
+                pauseBreakTimer(); // Automatically pause break timer when time is up
             }
         }, 1000);
     }
@@ -242,25 +247,27 @@ document.getElementById('resetBtn').onclick = function () {
     clearInterval(studyTimer);
     totalStudySeconds = initialStudySeconds;
     document.getElementById('timer').textContent = formatTime(totalStudySeconds);
-    playPauseBtn.classList.replace('fa-pause', 'fa-play');
+    studyIcon.classList.replace('fa-pause', 'fa-play');
 
     // Reset break timer
     isBreakRunning = false;
     clearInterval(breakTimer);
     totalBreakSeconds = initialBreakSeconds;
     document.getElementById('break').textContent = formatTime(totalBreakSeconds);
-    breakPlayPauseBtn.classList.replace('fa-pause', 'fa-play');
+    breakIcon.classList.replace('fa-pause', 'fa-play');
 };
 
 // Pause the study timer
 function pauseStudyTimer() {
     isStudyRunning = false;
     clearInterval(studyTimer);
+    startBreakTimer(); // Start break timer when study timer is paused
 }
 
 // Pause the break timer
 function pauseBreakTimer() {
     isBreakRunning = false;
+    breakIcon.classList.replace('fa-pause', 'fa-play');
     clearInterval(breakTimer);
 }
 
