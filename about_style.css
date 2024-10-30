@@ -1,0 +1,56 @@
+/* about_style.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f7f2;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+#header, #footer{
+    width: 100%;
+    padding-bottom: 0%;
+}
+
+#about, #why-us, #commitment {
+    max-width: 950px;
+    max-height: fit-content;
+    margin: 5px auto;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 255, 0, 0.1);
+}
+
+h2 {
+    color: #993399;
+    font-size: 1.5em;
+    border-bottom: 2px solid #993399;
+    padding-bottom: 5px;
+    margin-top: 0;
+}
+
+p, ul {
+    font-size: 1em;
+    line-height: 1.6;
+}
+
+ul {
+    list-style-type: square;
+    padding-left: 20px;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+section {
+    min-height: 26vh; /* Takes up at least 25% of the viewport height */
+    padding: 15px;
+    overflow: auto;
+}
