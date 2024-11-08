@@ -91,13 +91,14 @@ main {
 .breakTimer {
     display: flex;
     flex-direction: row;
-    margin-left: 9%;
+    margin-left: 11%;
     align-items: center;
     margin-bottom: 20px;
 }
 
 #break {
     font-size: 3rem;
+    /* margin-left: 15px; */
     font-weight: bold;
     color: #379956;
 }
@@ -263,7 +264,7 @@ footer p {
 .pauseAndTimer {
     display: flex;
     flex-direction: row;
-    margin-left: 9%;
+    margin-left: 11%;
     align-items: center;
     margin-top: -30px;
 }
