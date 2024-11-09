@@ -5,34 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | StudyMate</title>
-    <link rel="stylesheet" href="about_style.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="about_style.css">
 </head>
 
 <body onload="loadHeader(); loadFooter()">
     <div id="header"></div>
 
-    <section id="about">
-        <h2>Our Mission</h2>
-        <p>At StudyMate, we believe that finding the right study methods should be easy and efficient. 
-            Our goal is to bring a variety of study techniques together in one place, so you can focus more on learning and less on searching. 
-            Whether you’re preparing for exams, trying to stay organized, or exploring new ways to study, we have something for everyone.</p>
-    </section>
+    <main>
+        <div class="profile-container">
+            <!-- Profile 1 -->
+            <div class="profile">
+                <img src="img/etrit.png" alt="Etrit's profile picture" class="profile-img">
+                <h3>Etrit Hasolli</h3>
+                <p>Jo HIDI</p>
+                <p>Email: etrithasolli5@gmail.com</p>
+                <p>LinkedIn: <a href="https://www.linkedin.com/in/etrit-hasolli-6156332b6/">Etrit Hasolli</a></p>
+            </div>
 
-    <section id="why-us">
-        <h2>Why Choose StudyMate?</h2>
-        <ul>
-            <li>All-in-one platform for multiple study methods</li>
-            <li>Easy navigation and quick access to resources</li>
-            <li>Regularly updated content tailored for students</li>
-        </ul>
-    </section>
+            <!-- Profile 2 -->
+            <div class="profile">
+                <img src="person2.jpg" alt="Profile Picture of Person 2" class="profile-img">
+                <h3>Adnani</h3>
+                <p>PO HIDI</p>
+                <p>Email: jane.smith@example.com</p>
+                <p>LinkedIn: <a href="https://www.linkedin.com/in/janesmith">Jane Smith</a></p>
+            </div>
+        </div>
+    </main>
 
-    <section id="commitment">
-        <h2>Our Commitment</h2>
-        <p>We are dedicated to constantly improving and expanding our resources to meet the evolving needs of students worldwide. Your success is our priority!</p>
-    </section>
-
-<div id="footer"></div>
-<script src="header_load.js"></script>
+    <div id="footer"></div>
+    <script src="header_load.js"></script>
 </body>
 </html>

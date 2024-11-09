@@ -1,0 +1,146 @@
+/* about_style.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: #004a2f;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 30px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+nav ul li a:hover {
+    text-decoration: wavy;
+}
+
+/* Footer styles */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+}
+
+main {
+    flex-grow: 1; /* Allows the main content to take up remaining space */
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.game-section {
+    text-align: center;
+}
+
+#startSudokuButton, #checkButton {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #004a2f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+#startSudokuButton:hover, #checkButton:hover {
+    background-color: #006644;
+}
+
+#sudokuGrid {
+    display: grid;
+    grid-template-columns: repeat(9, 40px);
+    grid-gap: 2px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.sudoku-cell {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #333;
+    cursor: pointer;
+}
+
+.number-button {
+    width: 40px;
+    height: 40px;
+    margin: 0 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    background-color: #004a2f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.number-button.selected {
+    background-color: #379956;
+}
+
+.prefilled {
+    background-color: #ddd;
+    font-weight: bold;
+    color: #333;
+}
+
+#numberSelector {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+p {
+    font-size: larger;
+    margin-top: 16px;
+}

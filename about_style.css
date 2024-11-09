@@ -1,56 +1,105 @@
 /* about_style.css */
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f7f2;
-    color: #333;
+* {
     margin: 0;
     padding: 0;
-}
-#header, #footer{
-    width: 100%;
-    padding-bottom: 0%;
-}
-
-#about, #why-us, #commitment {
-    max-width: 950px;
-    max-height: fit-content;
-    margin: 5px auto;
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 255, 0, 0.1);
-}
-
-h2 {
-    color: #993399;
-    font-size: 1.5em;
-    border-bottom: 2px solid #993399;
-    padding-bottom: 5px;
-    margin-top: 0;
-}
-
-p, ul {
-    font-size: 1em;
-    line-height: 1.6;
-}
-
-ul {
-    list-style-type: square;
-    padding-left: 20px;
+    box-sizing: border-box;
 }
 
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    overflow: auto;
     display: flex;
     flex-direction: column;
 }
-section {
-    min-height: 26vh; /* Takes up at least 25% of the viewport height */
-    padding: 15px;
-    overflow: auto;
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f7f2;
+    color: #333;
+}
+
+header {
+    background-color: #004a2f;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 30px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+nav ul li a:hover {
+    text-decoration: wavy;
+}
+
+/* Footer styles */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+}
+
+main {
+    flex-grow: 1; /* Allows the main content to take up remaining space */
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+}
+
+/* Styles for the profile container and profiles */
+.profile-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    padding: 20px;
+}
+
+.profile {
+    text-align: center;
+    width: fit-content;
+    background-color: #f9f9f9;
+    margin: 0 60px 0 60px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    margin-bottom: 15px;
 }

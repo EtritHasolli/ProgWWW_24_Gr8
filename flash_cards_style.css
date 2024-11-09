@@ -42,14 +42,14 @@ main {
 #add-card-form button {
     padding: 8px 16px;
     font-size: 1em;
-    background-color: #379956;
+    background-color: #004a2f;
     color: white;
     border: none;
     cursor: pointer;
 }
 
 #add-card-form button:hover {
-    background-color: #61c17f; /* Change hover color for better visibility */
+    background-color: #379956; /* Change hover color for better visibility */
 }
 
 /* Flashcard Table Styling */
