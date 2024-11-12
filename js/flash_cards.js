@@ -14,11 +14,11 @@ function loadCards() {
             <div class="flashcard">
                 <div class="front">
                     ${card.question}
-                    <button class="delete-btn" onclick="deleteFlashCard(this)">Delete</button>
+                    <button class="delete-btn" onclick="deleteFlashCard(event, this)">Delete</button>
                 </div>
                 <div class="back">
                     ${card.answer}
-                    <button class="delete-btn" onclick="deleteFlashCard(this)">Delete</button>
+                    <button class="delete-btn" onclick="deleteFlashCard(event, this)">Delete</button>
                 </div>
             </div>
         `;
@@ -26,25 +26,25 @@ function loadCards() {
     });
 }
 
-// Load header from HTML file
-function loadHeader() {
-    fetch('header.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('header').innerHTML = data;
-        })
-        .catch(error => console.error('Error loading header:', error));
+function addFlashCard() {
+    const question = document.getElementById('question').value.trim();
+    const answer = document.getElementById('answer').value.trim();
+
+    if (question && answer) {
+        // Save the flashcard to localStorage
+        saveFlashCard(question, answer);
+
+        // Clear the input fields
+        document.getElementById('question').value = '';
+        document.getElementById('answer').value = '';
+
+        // Reload the flashcards on the page
+        loadCards();
+    } else {
+        alert("Both question and answer are required.");
+    }
 }
 
-// Load footer from HTML file
-function loadFooter() {
-    fetch('footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('footer').innerHTML = data;
-        })
-        .catch(error => console.error('Error loading footer:', error));
-}
 
 // Flip the flashcard and manage delete button visibility
 function flipCard(cell) {
@@ -63,41 +63,10 @@ function flipCard(cell) {
     }
 }
 
-// Add a new flashcard
-function addFlashCard() {
-    const question = document.getElementById("question").value;
-    const answer = document.getElementById("answer").value;
-
-    if (question && answer) {
-        const tableRow = document.querySelector("table tr");
-        const newCell = document.createElement("td");
-        newCell.onclick = function() { flipCard(newCell); };
-
-        newCell.innerHTML = `
-            <div class="flashcard">
-                <div class="front">
-                    ${question}
-                    <button class="delete-btn" onclick="deleteFlashCard(this)">Delete</button>
-                </div>
-                <div class="back">
-                    ${answer}
-                    <button class="delete-btn" onclick="deleteFlashCard(this)">Delete</button>
-                </div>
-            </div>
-        `;
-
-        tableRow.appendChild(newCell);
-        saveFlashCard(question, answer); // Save the new flashcard to localStorage
-
-        document.getElementById("question").value = '';
-        document.getElementById("answer").value = '';
-    } else {
-        alert("Please enter both a question and an answer.");
-    }
-}
-
 // Delete a flashcard
-function deleteFlashCard(button) {
+function deleteFlashCard(event, button) {
+    event.stopPropagation(); // Prevent triggering flipCard on button click
+
     const cell = button.closest("td");
     if (cell) {
         const question = cell.querySelector('.front').childNodes[0].textContent.trim(); // Get the question to find the card
@@ -127,3 +96,7 @@ window.onload = function() {
     loadFooter();
     loadCards(); // Load the flashcards from localStorage
 };
+
+document.getElementById('light_dark_button').addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+});
