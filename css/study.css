@@ -3,6 +3,7 @@
     width: 600px;
     height: 400px;
     display: flex;
+
     margin: auto;
     justify-content: center;
     align-items: center;
@@ -92,4 +93,28 @@ button:hover {
 
 .background1, .background {
     border-left: 1px solid var(--primary-color);
+}
+
+/* Light/Dark Mode Toggle Button */
+#light_dark {
+    position: absolute;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    bottom: 30px;
+    right: 0px;
+}
+
+#light_dark_button {
+    background-color: var(--light-dark-button-color);
+    color: var(--light-dark-button-inside-color);
+    border: none;
+    padding: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+#light_dark_button:hover {
+background-color: #e0e0e0;
 }

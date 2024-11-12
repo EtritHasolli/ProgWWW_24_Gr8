@@ -1,92 +1,3 @@
-/* Basic Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Light Mode Colors (default) */
-:root {
-    --background-color: #efeff2;
-    --primary-color: #004a2f;
-    --accent-color: #379956;
-    --button-color: #135e2b;
-    --button-hover-color: #379956;
-    --modal-bg-color: white;
-    --modal-text-color: #333;
-    --footer-bg-color: #333;
-    --footer-text-color: white;
-    --light-dark-button-color: #333;
-    --light-dark-button-inside-color: white;
-}
-
-/* Dark Mode Colors */
-body.dark-mode {
-    --background-color: #333;
-    --primary-color: #1a2a1f;
-    --accent-color: #004a2f;
-    --button-color: #004a2f;
-    --button-hover-color: #379956;
-    --modal-bg-color: #dcd5d5;
-    --modal-text-color: #333;
-    --footer-bg-color: #1a2a1f;
-    --footer-text-color: white;
-    --light-dark-button-color: white;
-    --light-dark-button-inside-color: #333;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: var(--background-color);
-    color: var(--modal-text-color);
-    line-height: 1.6;
-}
-
-header {
-    background-color: var(--primary-color);
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-}
-
-header h1 {
-    margin: 0;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    padding: 0;
-}
-
-nav ul li {
-    margin: 0 30px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: large;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-nav ul li a:hover {
-    text-decoration: wavy;
-}
-
 main {
     flex-grow: 1;
     padding: 20px;
@@ -100,6 +11,7 @@ main {
 #study-info {
     margin-top: auto;
     text-align: center;
+    color: var(--study-info-color);
 }
 
 #timer-section {
@@ -197,19 +109,6 @@ button:hover {
     background-color: var(--button-hover-color);
 }
 
-/* Footer styles */
-footer {
-    background-color: var(--footer-bg-color);
-    color: var(--footer-text-color);
-    padding: 10px 0;
-    text-align: center;
-    width: 100%;
-}
-
-footer p {
-    margin: 0;
-}
-
 /* Modal Styles */
 .modal {
     display: none;
@@ -297,24 +196,29 @@ footer p {
     margin-top: -30px;
 }
 
-/* Light/Dark Mode Toggle Button */
+ /* Light/Dark Mode Toggle Button */
 #light_dark {
-    position: fixed;
-    bottom: 40px;
-    right: 5px;
+    position: absolute;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-bottom: 10px; /* Adjusts the spacing above the footer */
+    margin-right: 10px;
+    bottom: 30px;
+    right: 0px;
 }
 
 #light_dark_button {
     background-color: var(--light-dark-button-color);
     color: var(--light-dark-button-inside-color);
     border: none;
-    padding: 17px;
-    border-radius: 50%;
+    padding: 10px;
+    font-size: 1.5rem;
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
+    border-radius: 50%;
+    transition: background-color 0.3s;
 }
 
 #light_dark_button:hover {
-    background-color: #e0e0e0;
+background-color: #e0e0e0;
 }

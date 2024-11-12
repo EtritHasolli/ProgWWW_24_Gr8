@@ -6,8 +6,7 @@
         <title>Document</title>
     </head>
         <style>
-
-                        /* Light Mode Colors (default) */
+            /* Light Mode Colors (default) */
             :root {
                 --background-color: #efeff2;
                 --primary-color: #004a2f;
@@ -35,13 +34,14 @@
                 --footer-text-color: white;
                 --light-dark-button-color: white;
                 --light-dark-button-inside-color: #333;
+                --study-info-color: white;
             }
 
             body {
                 font-family: Arial, sans-serif;
                 background-color: var(--background-color);
                 color: var(--modal-text-color);
-                line-height: 1.6;
+                line-height: 1.5;
             }
 
             header {
@@ -97,29 +97,6 @@
             nav ul li a:hover::after {
                 width: 100%; /* Expands the underline from left to right */
             }
-
-            /* Light/Dark Mode Toggle Button */
-            #light_dark {
-                position: fixed;
-                bottom: 40px;
-                right: 5px;
-            }
-
-            #light_dark_button {
-                background-color: var(--light-dark-button-color);
-                color: var(--light-dark-button-inside-color);
-                border: none;
-                padding: 17px;
-                border-radius: 50%;
-                cursor: pointer;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                transition: background-color 0.3s ease;
-            }
-
-            #light_dark_button:hover {
-                background-color: #e0e0e0;
-            }
-
         </style>
     <body>
         <header>
