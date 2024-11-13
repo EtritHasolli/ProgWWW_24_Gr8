@@ -1,0 +1,120 @@
+/* Book Pages Container */
+.book_pages {
+    width: 600px;
+    height: 400px;
+    display: flex;
+
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--primary-color); /* Use the primary color */
+    background: var(--background-color); /* Background color for the container */
+}
+
+/* Individual Pages */
+.page {
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid var(--primary-color); /* Primary color border */
+    display: none;
+    transition: transform 0.6s;
+    background-color: var(--background-color); /* Default background color for light mode */
+    color: var(--modal-text-color); /* Text color */
+}
+
+/* Dark Mode Pages */
+body.dark-mode .page {
+    background-color: #1a2a1f; /* Dark background for pages in dark mode */
+    color: white; /* Text color for dark mode */
+}
+
+.page:last-child {
+    border-right: none;
+}
+
+.page.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.page a {
+    height: initial;
+    margin-top: auto;
+}
+
+.page p {
+    margin-top: 20px;
+}
+
+/* Navigation Buttons */
+.navigation {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    background-color: var(--button-color); /* Button color */
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--button-hover-color); /* Hover effect */
+}
+
+/* Background for Pages (for page 1, 2, etc.) */
+.background_pages, .background_pages1, .background1, .background {
+    width: 1px;
+    height: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 0 3px;
+    background-color: var(--background-color); /* Background color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    transition: transform 0.6s;
+    border: var(--primary-color); /* Border color */
+}
+
+.background_pages1 {
+    border-right: 1px solid var(--primary-color);
+}
+
+.background1, .background {
+    border-left: 1px solid var(--primary-color);
+}
+
+/* Light/Dark Mode Toggle Button */
+#light_dark {
+    position: absolute;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    bottom: 30px;
+    right: 0px;
+}
+
+#light_dark_button {
+    background-color: var(--light-dark-button-color);
+    color: var(--light-dark-button-inside-color);
+    border: none;
+    padding: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+#light_dark_button:hover {
+background-color: #e0e0e0;
+}

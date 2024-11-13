@@ -70,13 +70,13 @@ footer p {
 }
 
 main {
-    flex-grow: 1; /* Allows the main content to take up remaining space */
+    flex-grow: 1;
     padding: 20px;
     max-width: 900px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    margin-top: 60px;
+    margin-top: 50px;
 }
 
 /* Styles for the profile container and profiles */
@@ -102,4 +102,28 @@ main {
     height: 150px;
     border-radius: 100%;
     margin-bottom: 15px;
+}
+
+/* Light/Dark Mode Toggle Button */
+#light_dark {
+    position: absolute;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    bottom: 30px;
+    right: 0px;
+}
+
+#light_dark_button {
+    background-color: var(--light-dark-button-color);
+    color: var(--light-dark-button-inside-color);
+    border: none;
+    padding: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+#light_dark_button:hover {
+background-color: #e0e0e0;
 }

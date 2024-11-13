@@ -37,3 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
     window.prevPage = prevPage;
     window.nextPage = nextPage;
 });
+
+document.getElementById('light_dark_button').addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+});

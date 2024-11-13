@@ -1,64 +1,5 @@
-/* Basic Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
-    line-height: 1.6;
-}
-
-header {
-    background-color: #004a2f;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-}
-
-header h1 {
-    margin: 0;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    padding: 0;
-}
-
-nav ul li {
-    margin: 0 30px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: large;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-nav ul li a:hover {
-    text-decoration: wavy;
-}
-
 main {
-    flex-grow: 1; /* Allows the main content to take up remaining space */
+    flex-grow: 1;
     padding: 20px;
     max-width: 900px;
     margin: 0 auto;
@@ -70,10 +11,11 @@ main {
 #study-info {
     margin-top: auto;
     text-align: center;
+    color: var(--study-info-color);
 }
 
 #timer-section {
-    background-color: #fff;
+    background-color: var(--modal-bg-color);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -84,7 +26,7 @@ main {
     font-size: 3rem;
     font-weight: bold;
     margin: 23px 0;
-    color: #379956;
+    color: var(--accent-color);
 }
 
 .breakTimer {
@@ -97,9 +39,8 @@ main {
 
 #break {
     font-size: 3rem;
-    /* margin-left: 15px; */
     font-weight: bold;
-    color: #379956;
+    color: var(--accent-color);
 }
 
 .bModal {
@@ -116,7 +57,7 @@ main {
 }
 
 .bModal .bModal-content {
-    background-color: white;
+    background-color: var(--modal-bg-color);
     padding: 20px;
     border-radius: 10px;
     text-align: center;
@@ -153,7 +94,7 @@ main {
 }
 
 button {
-    background-color: #379956;
+    background-color: var(--button-color);
     color: white;
     border: none;
     padding: 10px 20px;
@@ -165,20 +106,7 @@ button {
 }
 
 button:hover {
-    background-color: #379956;
-}
-
-/* Footer styles */
-footer {
-    background-color: #333;
-    color: white;
-    padding: 10px 0;
-    text-align: center;
-    width: 100%;
-}
-
-footer p {
-    margin: 0;
+    background-color: var(--button-hover-color);
 }
 
 /* Modal Styles */
@@ -194,7 +122,7 @@ footer p {
 }
 
 .modal-content {
-    background-color: white;
+    background-color: var(--modal-bg-color);
     padding: 20px;
     border-radius: 10px;
     text-align: center;
@@ -245,10 +173,10 @@ footer p {
 }
 
 #studyBtn, #breakBtn {
-    font-size: 14px; /* Increase font size for better visibility */
+    font-size: 14px;
     font-weight: 600;
     padding: 10px 20px;
-    background-color: #379956;
+    background-color: var(--button-color);
     border: none;
     cursor: pointer;
     border-radius: 30px;
@@ -257,7 +185,7 @@ footer p {
 }
 
 #studyBtn:hover, #breakBtn:hover {
-    background-color: #135e2b;
+    background-color: var(--button-hover-color);
 }
 
 .pauseAndTimer {
@@ -266,4 +194,31 @@ footer p {
     margin-left: 11%;
     align-items: center;
     margin-top: -30px;
+}
+
+ /* Light/Dark Mode Toggle Button */
+#light_dark {
+    position: absolute;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-bottom: 10px; /* Adjusts the spacing above the footer */
+    margin-right: 10px;
+    bottom: 30px;
+    right: 0px;
+}
+
+#light_dark_button {
+    background-color: var(--light-dark-button-color);
+    color: var(--light-dark-button-inside-color);
+    border: none;
+    padding: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+#light_dark_button:hover {
+background-color: #e0e0e0;
 }

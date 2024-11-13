@@ -3,25 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | StudyMate</title>
-    <link rel="stylesheet" href="minigames.css"> <!-- Link to your CSS file -->
+    <title>Sudoku Game | StudyMate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" href="css/minigames.css">
 </head>
 <body onload="loadHeader(); loadFooter()">
     <div id="header"></div>
 
     <main>
-         <!-- Sudoku Game Section -->
         <div class="game-section">
-            <button id="startSudokuButton" onclick="startNewSudoku()">Start New Game</button>
-            <button id="checkButton" onclick="checkSudoku()">Check Solution</button>
+            <div class="difficulty-buttons">
+                <button id="easyButton">Easy</button>
+                <button id="mediumButton">Medium</button>
+                <button id="hardButton">Hard</button>
+            </div>
+            <button id="startSudokuButton">Start New Game</button>
+            <button id="checkButton">Check Solution</button>
+            <button id="hintButton">Hint</button>
             <div id="sudokuGrid"></div>
-            <div id="numberSelector"></div> <!-- Number selection bar -->
+            <div id="numberSelector"></div>
             <p id="resultMessage"></p>
         </div>
     </main>
 
     <div id="footer"></div>
-    <script src="header_load.js"></script>
-    <script src="minigames.js"></script> <!-- Move this to end of body -->
+    <script src="js/header_load.js"></script>
+    <script src="js/minigames.js"></script>
 </body>
 </html>

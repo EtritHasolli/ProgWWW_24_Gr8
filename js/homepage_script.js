@@ -6,6 +6,8 @@ let isBreakRunning = false;
 let initialStudySeconds = 0;
 let initialBreakSeconds = 0;
 
+let isLight = false;
+
 let hoursBefore = 0;
 let minutesBefore = 0;
 let secondsBefore = 0;
@@ -278,3 +280,7 @@ function formatTime(seconds) {
     let secs = seconds % 60;
     return `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
 }
+
+document.getElementById('light_dark_button').addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+});
