@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cornell_style.css">
+    <title>Cornell Notes Layout</title>
+    
+</head>
+<body onload="loadHeader(); loadFooter();">
+
+    <!-- Header Section -->
+    <div id="header"></div>
+
+    <!-- Cornell Notes Layout -->
+    <main class="cornell-notes">
+        <div>
+            <h1>Cornell Notes</h1>
+            <p>Topic: <input type="text" placeholder="Enter topic here"></p>
+        </div>
+        <div class="notes-container">
+            <div class="cue-column">
+                <h2>Cues</h2>
+                <textarea placeholder="Write key terms, questions, or prompts here."></textarea>
+            </div>
+            <div class="main-notes">
+                <h2>Main Notes</h2>
+                <textarea placeholder="Record lecture notes or details here."></textarea>
+            </div>
+        </div>
+        <div class="summary">
+            <h2>Summary</h2>
+            <textarea placeholder="Summarize the main points in a few sentences here."></textarea>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <div id="footer"></div>
+<script src="header_load.js"></script>
+</body>
+</html>
