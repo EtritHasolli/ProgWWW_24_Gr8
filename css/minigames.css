@@ -1,8 +1,8 @@
 main {
-    flex-grow: 1;
-    padding: 20px;
+    /* flex-grow: 1; */
+    padding: 0px;
     max-width: 900px;
-    margin: 20px auto;
+    margin: auto auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,7 +15,7 @@ main {
 #startSudokuButton, #checkButton, #hintButton {
     padding: 10px 20px;
     font-size: 1em;
-    background-color: #004a2f;
+    background-color: #356859;
     color: white;
     border: none;
     border-radius: 5px;
@@ -36,7 +36,7 @@ main {
 .difficulty-buttons button {
     padding: 8px 12px;
     margin: 5px;
-    background-color: #004a2f;
+    background-color: #356859;
     color: white;
     border-radius: 5px;
     border: none;
@@ -102,7 +102,7 @@ main {
     margin: 0 5px;
     font-size: 1.2em;
     cursor: pointer;
-    background-color: #004a2f;
+    background-color: #356859;
     color: white;
     border: none;
     border-radius: 5px;
@@ -132,4 +132,31 @@ p {
     margin-top: 20px;
     color: #333;
     text-align: center;
+}
+
+/* Light/Dark Mode Toggle Button */
+#light_dark {
+    position: absolute;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-bottom: 22px; /* Adjusts the spacing above the footer */
+    margin-right: 20px;
+    bottom: 30px;
+    right: 0px;
+}
+
+#light_dark_button {
+    background-color: var(--light-dark-button-color);
+    color: var(--light-dark-button-inside-color);
+    border: none;
+    padding: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+#light_dark_button:hover {
+background-color: #e0e0e0;
 }

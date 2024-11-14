@@ -196,7 +196,7 @@ button:hover {
     margin-top: -30px;
 }
 
- /* Light/Dark Mode Toggle Button */
+/* Light/Dark Mode Toggle Button */
 #light_dark {
     position: absolute;
     display: flex;

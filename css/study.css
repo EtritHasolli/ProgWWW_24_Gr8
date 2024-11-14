@@ -27,8 +27,8 @@
 
 /* Dark Mode Pages */
 body.dark-mode .page {
-    background-color: #1a2a1f; /* Dark background for pages in dark mode */
-    color: white; /* Text color for dark mode */
+    background-color: var(--book-page-color); /* Dark background for pages in dark mode */
+    color: var(--book-text-color); /* Text color for dark mode */
 }
 
 .page:last-child {
@@ -84,16 +84,33 @@ button:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     transition: transform 0.6s;
-    border: var(--primary-color); /* Border color */
 }
 
-.background_pages1 {
-    border-right: 1px solid var(--primary-color);
+/* Light Mode Borders */
+.background_pages1, .background1 {
+    border-right: 1px solid var(--primary-color); /* Right border for light mode */
 }
 
-.background1, .background {
-    border-left: 1px solid var(--primary-color);
+.background {
+    border-left: 1px solid var(--primary-color); /* Left border for light mode */
 }
+
+/* Dark Mode Background and Borders */
+body.dark-mode .background_pages, 
+body.dark-mode .background_pages1, 
+body.dark-mode .background1, 
+body.dark-mode .background {
+    background-color: var(--book-page-color); /* Dark mode page background */
+}
+
+body.dark-mode .background_pages1 {
+    border-right: 1px solid var(--book-border-color); /* Right border for dark mode */
+}
+
+body.dark-mode .background {
+    border-left: 1px solid var(--book-border-color); /* Left border for dark mode */
+}
+
 
 /* Light/Dark Mode Toggle Button */
 #light_dark {
