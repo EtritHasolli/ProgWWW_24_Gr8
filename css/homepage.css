@@ -212,7 +212,10 @@ button:hover {
     background-color: var(--light-dark-button-color);
     color: var(--light-dark-button-inside-color);
     border: none;
-    padding: 10px;
+    padding-top: 6px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 6px;
     font-size: 1.5rem;
     cursor: pointer;
     border-radius: 50%;
@@ -220,5 +223,5 @@ button:hover {
 }
 
 #light_dark_button:hover {
-background-color: #e0e0e0;
+background-color: var(--light-dark-button-hover-color);
 }

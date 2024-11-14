@@ -71,6 +71,9 @@ const studyIcon = document.getElementById('studyIcon');
 const breakBtn = document.getElementById('breakBtn');
 const breakIcon = document.getElementById('breakIcon');
 
+const lightDark = document.getElementById('lightDark');
+const lightDarkBtn = document.getElementById('light_dark_button');
+
 // Open modals when "Select Timer" or "Select Break" is clicked
 selectTimerBtn.onclick = () => (modal.style.display = 'flex');
 selectBreakBtn.onclick = () => (bModal.style.display = 'flex');
@@ -283,4 +286,17 @@ function formatTime(seconds) {
 
 document.getElementById('light_dark_button').addEventListener('click', function() {
     document.body.classList.toggle('dark-mode');
+    if (lightDark.classList.contains('fa-moon-o')) {
+        lightDark.classList.replace('fa-moon-o', 'fa-sun-o');
+        lightDarkBtn.style.paddingTop = '6px';
+        lightDarkBtn.style.paddingRight = '8px';
+        lightDarkBtn.style.paddingLeft = '8px';
+        lightDarkBtn.style.paddingBottom = '6px';
+    } else {
+        lightDark.classList.replace('fa-sun-o', 'fa-moon-o');
+        lightDarkBtn.style.paddingTop = '6px';
+        lightDarkBtn.style.paddingLeft = '10px';
+        lightDarkBtn.style.paddingRight = '10px';
+        lightDarkBtn.style.paddingBottom = '6px';
+    }
 });

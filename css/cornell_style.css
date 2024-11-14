@@ -73,3 +73,30 @@ header input[type="text"] {
     font-size: 18px;
     border: 1px solid #ddd;
 }
+
+/* Light/Dark Mode Toggle Button */
+#light_dark {
+    position: absolute;
+    margin-right: 17px;
+    margin-bottom: 20px;
+    bottom: 30px;
+    right: 5px;
+}
+
+#light_dark_button {
+    background-color: var(--light-dark-button-color);
+    color: var(--light-dark-button-inside-color);
+    border: none;
+    padding-top: 6px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 6px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+#light_dark_button:hover {
+background-color: #e0e0e0;
+}
