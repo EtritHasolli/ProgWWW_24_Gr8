@@ -161,5 +161,5 @@ p {
 }
 
 #light_dark_button:hover {
-background-color: #e0e0e0;
+    background-color: var(--light-dark-button-hover-color);
 }
