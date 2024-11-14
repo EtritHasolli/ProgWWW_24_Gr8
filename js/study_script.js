@@ -2,8 +2,9 @@ const lightDark = document.getElementById('lightDark');
 const lightDarkBtn = document.getElementById('light_dark_button');
 
 document.addEventListener("DOMContentLoaded", function() {
-    let currentPage = 1;  // Track the current "page pair"
-    
+    // Retrieve the last viewed page from localStorage or set to 1 if not set
+    let currentPage = parseInt(localStorage.getItem('lastViewedPage')) || 1;
+
     const pages = document.querySelectorAll('.page');
     const totalPages = Math.ceil(pages.length / 2);  // Each pair of pages counts as one "book spread"
 
@@ -18,6 +19,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 page.classList.remove('active');
             }
         });
+        // Save the current page to localStorage
+        localStorage.setItem('lastViewedPage', pageNumber);
     }
 
     function nextPage() {
@@ -34,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Initially show the first pair of pages
+    // Show the last viewed page on load
     showPages(currentPage);
 
     // Make prevPage and nextPage globally accessible
