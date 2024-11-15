@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/flash_cards_style.css">
     <title>Flash Cards</title>
 </head>
-<body onload="loadHeader(); loadFooter(); loadCards()">
+<body onload="loadHeader(), loadFooter(), loadCards()">
     <!-- Header Section -->
     <div id="header"></div>
 
@@ -33,7 +33,45 @@
         <button id="light_dark_button">
             <i id="lightDark" class="fa fa-moon-o" aria-hidden="true"></i>
         </button>
+
+        <button id="openColorPickerBtn"><i class="fa fa-paint-brush" aria-hidden="true"></i></button>
+        <!-- Color Picker Modal -->
+        <div id="colorPickerModal" class="modal">
+            <div class="modal-content">
+                <h3>Select Colors</h3>
+
+                <div class="color-picker-section">
+                    <input type="color" id="headerColorInput" value="#356859">
+                    <label for="headerColorInput">- Header Color</label>
+                </div>
+                <div class="color-picker-section">
+                    <input type="color" id="backgroundColorInput" value="#f5f5fa">
+                    <label for="backgroundColorInput">- Background Color</label>
+                </div>
+                <div class="color-picker-section">
+                    <input type="color" id="popColorInput" value="#356859">
+                    <label for="popColorInput">- Timer Section Color</label>
+                </div>
+                <div class="color-picker-section">
+                    <input type="color" id="accentColorInput" value="#4a7c68">
+                    <label for="accentColorInput">- Time Color</label>
+                </div>
+                <div class="color-picker-section">
+                    <input type="color" id="buttonColorInput" value="#4a7c68">
+                    <label for="buttonColorInput">- Button Color</label>
+                </div>
+
+                <!-- Apply and Close buttons -->
+                <div id="colorModalBtn" class="button-container">
+                    <button id="defaultColorsBtn">Return Default</button>
+                    <button id="applyColorsBtn">Apply Colors</button>
+                    <button id="closeColorPickerModal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
+    
+    <input type="color" id="colorPickerInput" style="display: none;">
 
     <div id="footer"></div>
     

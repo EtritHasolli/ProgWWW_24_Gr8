@@ -19,8 +19,9 @@
             flex-direction: column;
         }
 
-        /* Light Mode Colors (default) */
         :root {
+            --header-color: #356859;
+
             --background-color: #f5f5fa;         /* Light background with a soft, neutral tone */
             --primary-color: #356859;           /* Calming, muted green for primary elements */
             --accent-color: #4a7c68;            /* Slightly softened green for accents */
@@ -30,6 +31,8 @@
             /* Modal Colors */
             --modal-bg-color: #ffffff;          /* Pure white modal for clean contrast */
             --modal-text-color: #3a3a3a;        /* Dark gray for easy readability */
+            --modal-btn-color: #4a7c68;
+            --modal-btn-hover-color: #56b08d;
 
             /* Footer Colors */
             --footer-bg-color: #3a3a3a;         /* Dark gray footer background for modern feel */
@@ -40,6 +43,53 @@
             --light-dark-button-inside-color: #f5f5fa; /* Matches background for unity */
             --light-dark-button-hover-color: #878585;
 
+            --book-page-color: #e8e1e1;
+            --book-text-color: #3a3a3a;
+            --book-background-color: white;
+            --book-border-color: #333;
+
+            /* flash card colors */
+            --back-flash-card: #356859;
+            --back-del-btn: #3a3a3a;
+            --front-flash-card: #CA97A6;
+            --front-del-btn: #3a3a3a;
+        }
+
+        /* Light Mode Colors (default) */
+        body.light-mode-defaults {
+            --header-color: #356859;
+
+            --background-color: #f5f5fa;         /* Light background with a soft, neutral tone */
+            --primary-color: #356859;           /* Calming, muted green for primary elements */
+            --accent-color: #4a7c68;            /* Slightly softened green for accents */
+            --button-color: #4a7c68;            /* Softer button color for balance with primary color */
+            --button-hover-color: #56b08d;      /* Slightly brighter for hover effect */
+
+            /* Modal Colors */
+            --modal-bg-color: #ffffff;          /* Pure white modal for clean contrast */
+            --modal-text-color: #3a3a3a;        /* Dark gray for easy readability */
+            --modal-btn-color: #4a7c68;
+            --modal-btn-hover-color: #56b08d;
+
+            /* Pop-Up Color */
+            --pop-color: #ffffff;
+            --pop-text-color: #3a3a3a;
+
+            /* Footer Colors */
+            --footer-bg-color: #3a3a3a;         /* Dark gray footer background for modern feel */
+            --footer-text-color: #ffffff;       /* White footer text for strong contrast */
+
+            /* Light/Dark Button Colors */
+            --light-dark-button-color: #3a3a3a; /* Consistent dark gray for toggle button */
+            --light-dark-button-inside-color: #f5f5fa; /* Matches background for unity */
+            --light-dark-button-hover-color: #878585;
+
+            /* Book Colors */
+            --book-page-color: #e8e1e1;
+            --book-text-color: #3a3a3a;
+            --book-background-color: black;
+            --book-border-color: #333;
+
             /* flash card colors */
             --back-flash-card: #356859;
             --back-del-btn: #3a3a3a;
@@ -49,15 +99,23 @@
 
         /* Dark Mode Colors */
         body.dark-mode {
+            --header-color: #356859;
+
             --background-color: #2b2b2e;        
             --primary-color: #4a6a5a;           
             --accent-color: #56b08d;            
             --button-color: #356859;            
-            --button-hover-color: #68d1a0;      
+            --button-hover-color: #68d1a0;   
 
             /* Modal Colors */
             --modal-bg-color: #3a3a3a;          
-            --modal-text-color: #f0f0f0;        
+            --modal-text-color: #f0f0f0;
+            --modal-btn-color: #4a7c68;
+            --modal-btn-hover-color: #56b08d; 
+            
+            /* Pop-Up Color */
+            --pop-color: #3a3a3a;
+            --pop-text-color: #f0f0f0;
 
             /* Footer Colors */
             --footer-bg-color: #3a3a3a;         
@@ -84,7 +142,37 @@
         }
 
         body.costum {
+            --header-color: #356859;
+
+            --background-color: #f5f5fa;         /* Light background with a soft, neutral tone */
+            --primary-color: #356859;           /* Calming, muted green for primary elements */
+            --accent-color: #4a7c68;            /* Slightly softened green for accents */
+            --button-color: #4a7c68;            /* Softer button color for balance with primary color */
+            --button-hover-color: #56b08d;      /* Slightly brighter for hover effect */
+
+            /* Modal Colors */
+            --modal-bg-color: #ffffff;          /* Pure white modal for clean contrast */
+            --modal-text-color: #3a3a3a;        /* Dark gray for easy readability */
+            --modal-btn-color: #4a7c68;
+            --modal-btn-hover-color: #56b08d;
             
+            --pop-color: #ffffff;
+            --pop-text-color: #3a3a3a;
+
+            /* Footer Colors */
+            --footer-bg-color: #3a3a3a;         /* Dark gray footer background for modern feel */
+            --footer-text-color: #ffffff;       /* White footer text for strong contrast */
+
+            /* Light/Dark Button Colors */
+            --light-dark-button-color: #3a3a3a; /* Consistent dark gray for toggle button */
+            --light-dark-button-inside-color: #f5f5fa; /* Matches background for unity */
+            --light-dark-button-hover-color: #878585;
+
+            /* flash card colors */
+            --back-flash-card: #356859;
+            --back-del-btn: #3a3a3a;
+            --front-flash-card: #CA97A6;
+            --front-del-btn: #3a3a3a;
         }
 
         footer {

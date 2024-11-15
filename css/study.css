@@ -3,12 +3,11 @@
     width: 600px;
     height: 400px;
     display: flex;
-
     margin: auto;
     justify-content: center;
     align-items: center;
-    border: 1px solid var(--primary-color); /* Use the primary color */
-    background: var(--background-color); /* Background color for the container */
+    border: 1px solid var(--book-border-color); /* Use the primary color */
+    background: var(--book-page-color); /* Background color for the container */
 }
 
 /* Individual Pages */
@@ -18,11 +17,11 @@
     text-align: center;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-right: 1px solid var(--primary-color); /* Primary color border */
+    border-right: 1px solid var(--book-border-color); /* Primary color border */
     display: none;
     transition: transform 0.6s;
-    background-color: var(--background-color); /* Default background color for light mode */
-    color: var(--modal-text-color); /* Text color */
+    background-color: var(--book-page-color); /* Default background color for light mode */
+    color: var(--book-text-color); /* Text color */
 }
 
 /* Dark Mode Pages */
@@ -58,14 +57,15 @@ body.dark-mode .page {
 }
 
 button {
-    padding: 10px 20px;
-    margin: 0 10px;
-    border: none;
-    background-color: var(--button-color); /* Button color */
+    background-color: var(--button-color);
     color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    margin: 10px;
     cursor: pointer;
     border-radius: 5px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -80,7 +80,7 @@ button:hover {
     justify-content: center;
     align-items: center;
     padding: 0 3px;
-    background-color: var(--background-color); /* Background color */
+    background-color: var(--book-page-color); /* Background color */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     transition: transform 0.6s;
@@ -88,11 +88,11 @@ button:hover {
 
 /* Light Mode Borders */
 .background_pages1, .background1 {
-    border-right: 1px solid var(--primary-color); /* Right border for light mode */
+    border-right: 1px solid var(--book-border-color); /* Right border for light mode */
 }
 
 .background {
-    border-left: 1px solid var(--primary-color); /* Left border for light mode */
+    border-left: 1px solid var(--book-border-color); /* Left border for light mode */
 }
 
 /* Dark Mode Background and Borders */
@@ -111,30 +111,96 @@ body.dark-mode .background {
     border-left: 1px solid var(--book-border-color); /* Left border for dark mode */
 }
 
-
-/* Light/Dark Mode Toggle Button */
+/* Light/Dark Mode Toggle Button Container */
 #light_dark {
     position: absolute;
-    margin-right: 10px;
-    margin-bottom: 20px;
-    bottom: 30px;
-    right: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    bottom: 50px;
+    right: 10px;
 }
 
-#light_dark_button {
+/* Shared styling for light/dark toggle and color picker button */
+#light_dark_button, #openColorPickerBtn {
     background-color: var(--light-dark-button-color);
     color: var(--light-dark-button-inside-color);
     border: none;
-    padding-top: 6px;
-    padding-right: 10px;
-    padding-left: 10px;
-    padding-bottom: 6px;
+    padding: 6px 10px;
     font-size: 1.5rem;
     cursor: pointer;
     border-radius: 50%;
     transition: background-color 0.3s;
+    margin-right: 10px; /* Adds consistent spacing between buttons */
 }
 
-#light_dark_button:hover {
-background-color: var(--light-dark-button-hover-color);
+/* Hover effect for both buttons */
+#light_dark_button:hover, #openColorPickerBtn:hover {
+    background-color: var(--light-dark-button-hover-color);
+}
+
+/* Color picker css */
+/* Modal styles */
+#colorPickerModal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: var(--modal-bg-color);
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    flex-direction: column;
+    align-self: center;
+    padding: 20px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    border-radius: 10px;
+    width: 400px;
+}
+
+.color-picker-section {
+    display: flex;
+    align-items: center;
+    width: 100%; /* Ensure it takes full width to center-align inputs and labels */
+    justify-content: left; /* Centers each section horizontally */
+    margin: 10px;
+}
+
+.color-picker-section input[type="color"] {
+    margin-right: 10px;
+}
+
+.color-picker-section label {
+    font-size: 1rem;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#defaultColorsBtn, #applyColorsBtn, #closeColorPickerModal {
+    padding: 10px 20px;
+    background-color: var(--button-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#defaulColorsBtn:hover, #applyColorsBtn:hover, #closeColorPickerModal:hover {
+    background-color: var(--button-hover-color);
 }
