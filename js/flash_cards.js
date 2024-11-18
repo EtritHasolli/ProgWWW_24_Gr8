@@ -163,79 +163,77 @@ document.getElementById('applyColorsBtn').addEventListener('click', function() {
 });
 
 function loadBody() {
-    let theme = localStorage.getItem('theme') || 'light';
-    console.log("Loaded theme from localStorage:", theme); // Debug log
+    const darkMode = localStorage.getItem('darkMode') === 'true'; // Retrieve dark mode status
+    const previousTheme = localStorage.getItem('previousTheme') || 'light'; // Retrieve previous theme
 
-    if (theme === 'dark') {
+    if (darkMode) {
         document.body.classList.add('dark-mode');
         document.body.classList.remove('light-mode-defaults', 'custom');
-    } else if (theme === 'light') {
-        document.body.classList.add('light-mode-defaults');
-        document.body.classList.remove('dark-mode', 'custom');
-    } else if (theme === 'custom') {
-        // Apply custom theme from localStorage
-        const headerColor = localStorage.getItem('headerColor') || '#356859';
-        const backgroundColor = localStorage.getItem('backgroundColor') || '#f5f5fa';
-        const popColor = localStorage.getItem('popColor') || '#356859';
-        const accentColor = localStorage.getItem('accentColor') || '#4a7c68';
-        const buttonColor = localStorage.getItem('buttonColor') || '#4a7c68';
-
-        // Set CSS variables dynamically
-        document.documentElement.style.setProperty('--header-color', headerColor);
-        document.documentElement.style.setProperty('--background-color', backgroundColor);
-        document.documentElement.style.setProperty('--pop-color', popColor);
-        document.documentElement.style.setProperty('--accent-color', accentColor);
-        document.documentElement.style.setProperty('--button-color', buttonColor);
-
-        document.body.classList.add('custom');
-        document.body.classList.remove('dark-mode', 'light-mode-defaults');
     } else {
-        document.body.classList.add('light-mode-defaults');
-        document.body.classList.remove('dark-mode', 'custom');
+        if (previousTheme === 'custom') {
+            const headerColor = localStorage.getItem('headerColor') || '#356859';
+            const backgroundColor = localStorage.getItem('backgroundColor') || '#f5f5fa';
+            const popColor = localStorage.getItem('popColor') || '#356859';
+            const accentColor = localStorage.getItem('accentColor') || '#4a7c68';
+            const buttonColor = localStorage.getItem('buttonColor') || '#4a7c68';
+
+            // Set custom CSS properties
+            document.documentElement.style.setProperty('--header-color', headerColor);
+            document.documentElement.style.setProperty('--background-color', backgroundColor);
+            document.documentElement.style.setProperty('--pop-color', popColor);
+            document.documentElement.style.setProperty('--accent-color', accentColor);
+            document.documentElement.style.setProperty('--button-color', buttonColor);
+
+            // Apply 'custom' class
+            document.body.classList.add('custom');
+            document.body.classList.remove('light-mode-defaults');
+        } else {
+            document.body.classList.add('light-mode-defaults');
+            document.body.classList.remove('custom');
+        }
+        document.body.classList.remove('dark-mode');
     }
-};
+}
 
 // Toggle theme when the button is clicked
-document.getElementById('light_dark_button').addEventListener('click', function() {
-    const lightDark = document.getElementById('lightDark');
-    const lightDarkBtn = document.getElementById('light_dark_button');
+document.getElementById('light_dark_button').addEventListener('click', function () {
+    const isDarkMode = localStorage.getItem('darkMode') === 'true'; // Retrieve current dark mode state
+    const previousTheme = localStorage.getItem('previousTheme') || 'light'; // Retrieve previous theme
 
-    basicTheme = localStorage.getItem('theme');
+    if (isDarkMode) {
+        // Switch to the previous theme (custom or light)
+        localStorage.setItem('darkMode', 'false');
 
-    // Toggle dark mode class
-    document.body.classList.toggle('dark-mode');
+        if (previousTheme === 'custom') {
+            // Restore custom theme
+            const headerColor = localStorage.getItem('headerColor') || '#356859';
+            const backgroundColor = localStorage.getItem('backgroundColor') || '#f5f5fa';
+            const popColor = localStorage.getItem('popColor') || '#356859';
+            const accentColor = localStorage.getItem('accentColor') || '#4a7c68';
+            const buttonColor = localStorage.getItem('buttonColor') || '#4a7c68';
 
-    // Determine the new theme and save it
-    darkToggled = document.body.classList.contains('dark-mode') ? 'yes' : 'no';
+            // Set custom CSS properties
+            document.documentElement.style.setProperty('--header-color', headerColor);
+            document.documentElement.style.setProperty('--background-color', backgroundColor);
+            document.documentElement.style.setProperty('--pop-color', popColor);
+            document.documentElement.style.setProperty('--accent-color', accentColor);
+            document.documentElement.style.setProperty('--button-color', buttonColor);
 
-    if(darkToggled === 'yes'){
-        // Update the icon for light/dark mode
-        if (lightDark.classList.contains('fa-moon-o')) {
-            lightDark.classList.replace('fa-moon-o', 'fa-sun-o');
-            lightDarkBtn.style.paddingTop = '6px';
-            lightDarkBtn.style.paddingRight = '8px';
-            lightDarkBtn.style.paddingLeft = '8px';
-            lightDarkBtn.style.paddingBottom = '6px';
-        }  
-        // localStorage.setItem('theme', 'dark');
-
-    } else if(darkToggled === 'no') {
-        lightDark.classList.replace('fa-sun-o', 'fa-moon-o');
-        lightDarkBtn.style.paddingTop = '6px';
-        lightDarkBtn.style.paddingLeft = '10px';
-        lightDarkBtn.style.paddingRight = '10px';
-        lightDarkBtn.style.paddingBottom = '6px';
-
-        
-        if (basicTheme === 'light') {
-            // localStorage.setItem('theme', 'light');
-            document.body.classList.add('light-mode-defaults');
-            document.body.classList.remove('dark-mode', 'custom');
-        } else {
-            // localStorage.setItem('theme', 'custom');
             document.body.classList.add('custom');
-            document.body.classList.remove('dark-mode', 'light-mode-defaults');
+            document.body.classList.remove('light-mode-defaults', 'dark-mode');
+        } else {
+            // Switch to light mode defaults
+            document.body.classList.add('light-mode-defaults');
+            document.body.classList.remove('custom', 'dark-mode');
         }
+    } else {
+        // Save the current theme (custom or light) before enabling dark mode
+        const isCustom = document.body.classList.contains('custom');
+        localStorage.setItem('previousTheme', isCustom ? 'custom' : 'light');
+        localStorage.setItem('darkMode', 'true');
+
+        document.body.classList.add('dark-mode');
+        document.body.classList.remove('light-mode-defaults', 'custom');
     }
 });
 
