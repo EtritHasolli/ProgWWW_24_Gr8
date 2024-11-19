@@ -3,12 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon-session.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="css/homepage.css">
     <title>Study Website</title>
-</head>
+</head>  
 <body onload="loadHeader(), loadFooter(), loadBody()">
     <div id="header"></div>
+
+    <section id="goals-section">
+        <div class="goals-container">
+            <header class="goals-header">
+                <div class="goals-title">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="goals-icon">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M12 19a6 6 0 005.765-7.667l1.558-1.558a8 8 0 11-1.422-2.177l-1.416 1.417A6 6 0 1012 19zm-2-6a2 2 0 013.245-1.565 1 1 0 101.247-1.564 4 4 0 101.182 4.712 1 1 0 10-1.836-.792A2 2 0 0110 13z"
+                            fill="#FF6F61"></path>
+                    </svg>
+                    <h2>Session Goals</h2>
+                </div>
+            </header>
+    
+            <div class="goal-input">
+                <textarea placeholder="Type a goal..." id="goal-textarea"></textarea>
+                <button id="add-goal-btn" class="add-goal-btn">+</button>
+            </div>
+    
+            <div class="goals-stats">
+                <div class="open-goals">
+                    <span id="open-goals-count">0</span>
+                    <p>Open</p>
+                </div>
+                <div class="completed-goals">
+                    <span id="completed-goals-count">0</span>
+                    <p>Completed</p>
+                </div>
+            </div>
+    
+            <ul id="goals-list" class="goals-list">
+                <!-- Dynamic goals will be added here -->
+            </ul>
+        </div>
+    </section>
+    
+
+    <!-- main stuff -->
     <main>
         <section id="timer-section">
             <h2>Study Timer</h2>

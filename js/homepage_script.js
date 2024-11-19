@@ -414,3 +414,64 @@ document.getElementById('defaultColorsBtn').addEventListener('click', function (
     document.documentElement.style.removeProperty('--accent-color');
     document.documentElement.style.removeProperty('--button-color');
 });
+
+function openModal(modalId) {
+    document.getElementById(modalId).style.display = 'flex';
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+}
+
+// Add event listeners for closing the modals
+document.getElementById('closeModalBtn').addEventListener('click', () => closeModal('timerModal'));
+document.getElementById('closeBreakModal').addEventListener('click', () => closeModal('breakModal'));
+
+// Add goal functionality
+const addGoalBtn = document.getElementById('add-goal-btn');
+const goalTextarea = document.getElementById('goal-textarea');
+const goalsList = document.getElementById('goals-list');
+const openGoalsCount = document.getElementById('open-goals-count');
+const completedGoalsCount = document.getElementById('completed-goals-count');
+
+let openGoals = 0;
+let completedGoals = 0;
+
+addGoalBtn.addEventListener('click', () => {
+    const goalText = goalTextarea.value.trim();
+    if (!goalText) return;
+
+    // Create a new goal item
+    const li = document.createElement('li');
+    li.innerHTML = `
+        <span>${goalText}</span>
+        <button class="mark-completed-btn">✔</button>
+    `;
+    goalsList.appendChild(li);
+
+    // Clear the input field
+    goalTextarea.value = '';
+
+    // Update stats
+    openGoals++;
+    updateStats();
+
+    // Mark completed functionality
+    const markCompletedBtn = li.querySelector('.mark-completed-btn');
+    markCompletedBtn.addEventListener('click', () => {
+        li.classList.toggle('completed');
+        if (li.classList.contains('completed')) {
+            openGoals--;
+            completedGoals++;
+        } else {
+            openGoals++;
+            completedGoals--;
+        }
+        updateStats();
+    });
+});
+
+function updateStats() {
+    openGoalsCount.textContent = openGoals;
+    completedGoalsCount.textContent = completedGoals;
+}

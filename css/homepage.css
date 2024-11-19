@@ -1,7 +1,7 @@
 main {
     flex-grow: 1;
     padding: 20px;
-    max-width: 900px;
+    max-width: 90%; /* Adjust width for smaller screens */
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -18,14 +18,19 @@ main {
     background-color: var(--pop-color);
     padding: 20px;
     border-radius: 10px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    width: 100%; /* Use full width for small screens */
+    max-width: 600px; /* Limit maximum size */
 }
 
 #timer {
-    font-size: 3rem;
+    font-size: 2.5rem; /* Adjust size for smaller screens */
     font-weight: bold;
-    margin: 23px 0;
+    margin: 25px 0;
     color: var(--accent-color);
 }
 
@@ -38,7 +43,7 @@ main {
 }
 
 #break {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: bold;
     color: var(--accent-color);
 }
@@ -61,6 +66,7 @@ main {
     padding: 20px;
     border-radius: 10px;
     text-align: center;
+    width: 90%; /* Use a percentage for smaller screens */
     width: 300px;
 }
 
@@ -216,7 +222,7 @@ button:hover {
     padding-right: 10px;
     padding-left: 10px;
     padding-bottom: 6px;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     cursor: pointer;
     border-radius: 50%;
     transition: background-color 0.3s;
@@ -255,13 +261,14 @@ button:hover {
 .color-picker-section {
     display: flex;
     align-items: center;
+    gap: 10px;
     width: 100%; /* Ensure it takes full width to center-align inputs and labels */
     justify-content: left; /* Centers each section horizontally */
     margin: 10px;
 }
 
 .color-picker-section input[type="color"] {
-    margin-right: 10px;
+    margin-right: 0;
 }
 
 .color-picker-section label {
@@ -270,7 +277,8 @@ button:hover {
 
 .button-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    margin-top: 15px;
 }
 
 #defaultColorsBtn, #applyColorsBtn, #closeColorPickerModal {
@@ -284,4 +292,147 @@ button:hover {
 
 #defaulColorsBtn:hover, #applyColorsBtn:hover, #closeColorPickerModal:hover {
     background-color: var(--button-hover-color);
+}
+
+/* Goals Section Styles */
+#goals-section {
+    position: absolute; /* Change from fixed to absolute */
+    top: 12%; /* Adjust spacing from the top */
+    left: 1%; /* Adjust spacing from the left */
+    width: 30%; /* Adjust width as needed */
+    max-width: 300px;
+    z-index: 100; /* Ensure it appears above other elements */
+}
+
+.goals-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.goals-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.goals-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.goals-icon {
+    fill: #4a7c68;
+}
+
+.goal-input {
+    display: flex;
+    gap: 1rem;
+}
+
+textarea#goal-textarea {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 1%;
+    font-size: 1rem;
+    resize: none;
+}
+
+.add-goal-btn {
+    background-color: #4a7c68;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    /* width: 2.5rem;
+    height: 2.5rem; */
+    padding-left: 3.5%;
+    padding-right: 3.5%;
+    padding-top: 1%;
+    padding-bottom: 2%;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.goals-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.goals-stats div {
+    flex: 1;
+}
+
+.goals-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.goals-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.1rem 0.6rem;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+}
+
+.goals-list li.completed {
+    text-decoration: line-through;
+    color: #999;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    #goals-section {
+        position: static; /* Allow the goals section to fall naturally in the layout */
+        margin: 20px 0; /* Add spacing above and below */
+        width: 100%; /* Take the full width of the parent container */
+    }
+
+    #timer-section {
+        margin-top: 20px; /* Add spacing to prevent overlap */
+    }
+
+    main {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #timer {
+        font-size: 2rem;
+    }
+
+    #break {
+        font-size: 2rem;
+    }
+
+    #timer-section {
+        padding: 15px;
+    }
+
+    .bModal .bModal-content {
+        width: 80%;
+    }
+
+    button {
+        font-size: 0.8rem;
+        padding: 8px 15px;
+    }
+
+    #light_dark_button, #openColorPickerBtn {
+        font-size: 1rem;
+    }
+
+    #goals-section {
+        top: 15%;
+        left: 5%;
+        width: 90%;
+    }
 }
