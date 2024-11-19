@@ -90,7 +90,6 @@ window.onclick = (event) => {
     if (event.target === colorModal) colorModal.style.display = 'none';
 };
 
-// Function to handle scrollable selection with variable speed for both timers
 function startScroll(event, unit, timerType) {
     event.preventDefault();
     const initialY = event.clientY;
@@ -264,21 +263,18 @@ document.getElementById('resetBtn').onclick = function () {
     breakIcon.classList.replace('fa-pause', 'fa-play');
 };
 
-// Pause the study timer
 function pauseStudyTimer() {
     isStudyRunning = false;
     clearInterval(studyTimer);
-    startBreakTimer(); // Start break timer when study timer is paused
+    startBreakTimer();
 }
 
-// Pause the break timer
 function pauseBreakTimer() {
     isBreakRunning = false;
     breakIcon.classList.replace('fa-pause', 'fa-play');
     clearInterval(breakTimer);
 }
 
-// Format time in HH:MM:SS format
 function formatTime(seconds) {
     let hrs = Math.floor(seconds / 3600);
     let mins = Math.floor((seconds % 3600) / 60);
@@ -287,7 +283,6 @@ function formatTime(seconds) {
 }
 
 // Color picker js
-// Open the color picker modal
 document.getElementById('openColorPickerBtn').addEventListener('click', function () {
     // Fetch colors from localStorage
     const headerColor = localStorage.getItem('headerColor') || '#356859';
@@ -307,13 +302,10 @@ document.getElementById('openColorPickerBtn').addEventListener('click', function
     document.getElementById('colorPickerModal').style.display = 'block';
 });
 
-
-// Close the color picker modal
 document.getElementById('closeColorPickerModal').addEventListener('click', function() {
     document.getElementById('colorPickerModal').style.display = 'none';
 });
 
-// Apply selected colors to the CSS custom properties
 document.getElementById('applyColorsBtn').addEventListener('click', function() {
     const headerColor = document.getElementById('headerColorInput').value;
     const backgroundColor = document.getElementById('backgroundColorInput').value;
@@ -342,8 +334,8 @@ document.getElementById('applyColorsBtn').addEventListener('click', function() {
 
 // On page load, apply the saved theme
 function loadBody() {
-    const darkMode = localStorage.getItem('darkMode') === 'true'; // Retrieve dark mode status
-    const previousTheme = localStorage.getItem('previousTheme') || 'light'; // Retrieve previous theme
+    const darkMode = localStorage.getItem('darkMode') === 'true';
+    const previousTheme = localStorage.getItem('previousTheme') || 'light';
 
     if (darkMode) {
         document.body.classList.add('dark-mode');
@@ -376,22 +368,19 @@ function loadBody() {
 
 // Toggle theme when the button is clicked
 document.getElementById('light_dark_button').addEventListener('click', function () {
-    const isDarkMode = localStorage.getItem('darkMode') === 'true'; // Retrieve current dark mode state
-    const previousTheme = localStorage.getItem('previousTheme') || 'light'; // Retrieve previous theme
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    const previousTheme = localStorage.getItem('previousTheme') || 'light';
 
     if (isDarkMode) {
-        // Switch to the previous theme (custom or light)
         localStorage.setItem('darkMode', 'false');
 
         if (previousTheme === 'custom') {
-            // Restore custom theme
             const headerColor = localStorage.getItem('headerColor') || '#356859';
             const backgroundColor = localStorage.getItem('backgroundColor') || '#f5f5fa';
             const popColor = localStorage.getItem('popColor') || '#356859';
             const accentColor = localStorage.getItem('accentColor') || '#4a7c68';
             const buttonColor = localStorage.getItem('buttonColor') || '#4a7c68';
 
-            // Set custom CSS properties
             document.documentElement.style.setProperty('--header-color', headerColor);
             document.documentElement.style.setProperty('--background-color', backgroundColor);
             document.documentElement.style.setProperty('--pop-color', popColor);
@@ -401,12 +390,10 @@ document.getElementById('light_dark_button').addEventListener('click', function 
             document.body.classList.add('custom');
             document.body.classList.remove('light-mode-defaults', 'dark-mode');
         } else {
-            // Switch to light mode defaults
             document.body.classList.add('light-mode-defaults');
             document.body.classList.remove('custom', 'dark-mode');
         }
     } else {
-        // Save the current theme (custom or light) before enabling dark mode
         const isCustom = document.body.classList.contains('custom');
         localStorage.setItem('previousTheme', isCustom ? 'custom' : 'light');
         localStorage.setItem('darkMode', 'true');
@@ -416,14 +403,12 @@ document.getElementById('light_dark_button').addEventListener('click', function 
     }
 });
 
-// Reset to default light/dark mode when the defaultColorsBtn is clicked
 document.getElementById('defaultColorsBtn').addEventListener('click', function () {
     document.body.classList.add('light-mode-defaults');
     let currentTheme = document.body.classList.contains('light-mode-defaults') ? 'light' : 'custom';
     document.body.classList.remove('dark-mode', 'custom');
     localStorage.setItem('previousTheme', currentTheme);
 
-    // Reset CSS custom properties
     document.documentElement.style.removeProperty('--background-color');
     document.documentElement.style.removeProperty('--pop-color');
     document.documentElement.style.removeProperty('--accent-color');
