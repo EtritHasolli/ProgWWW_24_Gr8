@@ -151,6 +151,7 @@ document.getElementById('applyColorsBtn').addEventListener('click', function() {
     localStorage.setItem('buttonColor', buttonColor);
 
     document.body.classList.add('custom');
+    localStorage.setItem('darkMode', 'false');
     document.body.classList.remove('dark-mode', 'light-mode-defaults');
 });
 

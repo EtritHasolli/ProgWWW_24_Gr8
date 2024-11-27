@@ -36,6 +36,7 @@ button:hover {
     text-align: center;
     width: fit-content;
     background-color: #f9f9f9;
+    color: #3a3a3a;
     margin: 0 60px 0 60px;
     padding: 20px;
     border-radius: 8px;
@@ -80,7 +81,7 @@ button:hover {
 /* Color picker css */
 /* Modal styles */
 #colorPickerModal {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
     z-index: 1000;
     left: 0;

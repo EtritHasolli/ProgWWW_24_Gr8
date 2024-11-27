@@ -57,15 +57,17 @@ document.getElementById('openColorPickerBtn').addEventListener('click', function
     // Fetch colors from localStorage
     const headerColor = localStorage.getItem('headerColor') || '#356859';
     const backgroundColor = localStorage.getItem('backgroundColor') || '#f5f5fa';
-    const popColor = localStorage.getItem('popColor') || '#356859';
-    const accentColor = localStorage.getItem('accentColor') || '#4a7c68';
+    const notesColor = localStorage.getItem('notesColor') || '#356859';
+    const titleColor = localStorage.getItem('titleColor') || '#fff';
+    const textColor = localStorage.getItem('textColor') || '#4a7c68';
     const buttonColor = localStorage.getItem('buttonColor') || '#4a7c68';
 
     // Set input values
     document.getElementById('headerColorInput').value = headerColor;
     document.getElementById('backgroundColorInput').value = backgroundColor;
-    document.getElementById('popColorInput').value = popColor;
-    document.getElementById('accentColorInput').value = accentColor;
+    document.getElementById('notesColorInput').value = notesColor;
+    document.getElementById('titleColorInput').value = titleColor;
+    document.getElementById('textColorInput').value = textColor;
     document.getElementById('buttonColorInput').value = buttonColor;
 
     // Open the color picker modal
@@ -82,26 +84,30 @@ document.getElementById('closeColorPickerModal').addEventListener('click', funct
 document.getElementById('applyColorsBtn').addEventListener('click', function() {
     const headerColor = document.getElementById('headerColorInput').value;
     const backgroundColor = document.getElementById('backgroundColorInput').value;
-    const popColor = document.getElementById('popColorInput').value;
-    const accentColor = document.getElementById('accentColorInput').value;
+    const notesColor = document.getElementById('notesColorInput').value;
+    const titleColor = document.getElementById('titleColorInput').value;
+    const textColor = document.getElementById('textColorInput').value;
     const buttonColor = document.getElementById('buttonColorInput').value;
 
     // Set CSS variables dynamically
     document.documentElement.style.setProperty('--header-color', headerColor);
     document.documentElement.style.setProperty('--background-color', backgroundColor);
-    document.documentElement.style.setProperty('--pop-color', popColor);
-    document.documentElement.style.setProperty('--accent-color', accentColor);
+    document.documentElement.style.setProperty('--notes-background', notesColor);
+    document.documentElement.style.setProperty('--notes-title-color', titleColor);
+    document.documentElement.style.setProperty('--notes-text-color', textColor);
     document.documentElement.style.setProperty('--button-color', buttonColor);
 
     // Save custom colors to localStorage
-    localStorage.setItem('theme', 'custom');
+    localStorage.setItem('previousTheme', 'custom');
     localStorage.setItem('headerColor', headerColor);
     localStorage.setItem('backgroundColor', backgroundColor);
-    localStorage.setItem('popColor', popColor);
-    localStorage.setItem('accentColor', accentColor);
+    localStorage.setItem('notesColor', notesColor);
+    localStorage.setItem('titleColor', titleColor);
+    localStorage.setItem('textColor', textColor);
     localStorage.setItem('buttonColor', buttonColor);
 
     document.body.classList.add('custom');
+    localStorage.setItem('darkMode', 'false');
     document.body.classList.remove('dark-mode', 'light-mode-defaults');
 });
 
@@ -116,15 +122,17 @@ function loadBody() {
         if (previousTheme === 'custom') {
             const headerColor = localStorage.getItem('headerColor') || '#356859';
             const backgroundColor = localStorage.getItem('backgroundColor') || '#f5f5fa';
-            const popColor = localStorage.getItem('popColor') || '#356859';
-            const accentColor = localStorage.getItem('accentColor') || '#4a7c68';
+            const notesColor = localStorage.getItem('notesColor') || '#356859';
+            const titleColor = localStorage.getItem('titleColor') || '#fff';
+            const textColor = localStorage.getItem('textColor') || '#4a7c68';
             const buttonColor = localStorage.getItem('buttonColor') || '#4a7c68';
 
             // Set custom CSS properties
             document.documentElement.style.setProperty('--header-color', headerColor);
             document.documentElement.style.setProperty('--background-color', backgroundColor);
-            document.documentElement.style.setProperty('--pop-color', popColor);
-            document.documentElement.style.setProperty('--accent-color', accentColor);
+            document.documentElement.style.setProperty('--notes-background', notesColor);
+            document.documentElement.style.setProperty('--notes-title-color', titleColor);
+            document.documentElement.style.setProperty('--notes-text-color', textColor);
             document.documentElement.style.setProperty('--button-color', buttonColor);
 
             // Apply 'custom' class
@@ -151,15 +159,17 @@ document.getElementById('light_dark_button').addEventListener('click', function 
             // Restore custom theme
             const headerColor = localStorage.getItem('headerColor') || '#356859';
             const backgroundColor = localStorage.getItem('backgroundColor') || '#f5f5fa';
-            const popColor = localStorage.getItem('popColor') || '#356859';
-            const accentColor = localStorage.getItem('accentColor') || '#4a7c68';
+            const notesColor = localStorage.getItem('notesColor') || '#356859';
+            const titleColor = localStorage.getItem('titleColor') || '#fff';
+            const textColor = localStorage.getItem('textColor') || '#4a7c68';
             const buttonColor = localStorage.getItem('buttonColor') || '#4a7c68';
 
             // Set custom CSS properties
             document.documentElement.style.setProperty('--header-color', headerColor);
             document.documentElement.style.setProperty('--background-color', backgroundColor);
-            document.documentElement.style.setProperty('--pop-color', popColor);
-            document.documentElement.style.setProperty('--accent-color', accentColor);
+            document.documentElement.style.setProperty('--notes-background', notesColor);
+            document.documentElement.style.setProperty('--notes-title-color', titleColor);
+            document.documentElement.style.setProperty('--notes-text-color', textColor);
             document.documentElement.style.setProperty('--button-color', buttonColor);
 
             document.body.classList.add('custom');
@@ -185,11 +195,11 @@ document.getElementById('defaultColorsBtn').addEventListener('click', function (
     document.body.classList.add('light-mode-defaults');
     let currentTheme = document.body.classList.contains('light-mode-defaults') ? 'light' : 'dark';
     document.body.classList.remove('dark-mode', 'custom');
-    localStorage.setItem('theme', currentTheme);
+    localStorage.setItem('previousTheme', currentTheme);
 
     // Reset CSS custom properties
     document.documentElement.style.removeProperty('--background-color');
-    document.documentElement.style.removeProperty('--pop-color');
-    document.documentElement.style.removeProperty('--accent-color');
+    document.documentElement.style.removeProperty('--notes-background');
+    document.documentElement.style.removeProperty('--notes-text-color');
     document.documentElement.style.removeProperty('--button-color');
 });

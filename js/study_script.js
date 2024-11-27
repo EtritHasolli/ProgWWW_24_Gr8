@@ -97,7 +97,7 @@ document.getElementById('applyColorsBtn').addEventListener('click', function() {
     document.documentElement.style.setProperty('--button-color', buttonColor);
 
     // Save custom colors to localStorage
-    localStorage.setItem('theme', 'custom');
+    localStorage.setItem('previousTheme', 'custom');
     localStorage.setItem('headerColor', headerColor);
     localStorage.setItem('backgroundColor', backgroundColor);
     localStorage.setItem('pageColor', pageColor);
@@ -105,10 +105,8 @@ document.getElementById('applyColorsBtn').addEventListener('click', function() {
     localStorage.setItem('buttonColor', buttonColor);
 
     document.body.classList.add('custom');
+    localStorage.setItem('darkMode', 'false');
     document.body.classList.remove('dark-mode', 'light-mode-defaults');
-
-    // Close the modal after applying colors
-    // document.getElementById('colorPickerModal').style.display = 'none';
 });
 
 function loadBody() {
@@ -191,7 +189,7 @@ document.getElementById('defaultColorsBtn').addEventListener('click', function (
     document.body.classList.add('light-mode-defaults');
     let currentTheme = document.body.classList.contains('light-mode-defaults') ? 'light' : 'dark';
     document.body.classList.remove('dark-mode', 'custom');
-    localStorage.setItem('theme', currentTheme);
+    localStorage.setItem('previousTheme', currentTheme);
 
     // Reset CSS custom properties
     document.documentElement.style.removeProperty('--background-color');
