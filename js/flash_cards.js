@@ -1,7 +1,7 @@
 const lightDark = document.getElementById('lightDark');
 const lightDarkBtn = document.getElementById('light_dark_button');
 
-const colorModal = document.getElementById('colorPickerModal')
+const colorModal = document.getElementById('colorPickerModal');
 
 window.onclick = (event) => {
     if (event.target === colorModal) colorModal.style.display = 'none';
@@ -99,72 +99,65 @@ function saveFlashCard(question, answer) {
     localStorage.setItem("flashcards", JSON.stringify(flashcards));
 }
 
-// Load cards when the page is loaded
-window.onload = function() {
-    loadHeader();
-    loadFooter();
-    loadCards(); // Load the flashcards from localStorage
-};
-
-// Open the color picker modal
+// Color picker js
 document.getElementById('openColorPickerBtn').addEventListener('click', function () {
     // Fetch colors from localStorage
     const headerColor = localStorage.getItem('headerColor') || '#356859';
     const backgroundColor = localStorage.getItem('backgroundColor') || '#f5f5fa';
-    const popColor = localStorage.getItem('popColor') || '#356859';
-    const accentColor = localStorage.getItem('accentColor') || '#4a7c68';
+    const flashCardTextColor = localStorage.getItem('flashCardTextColor') || '#000000';
+    const frontCardColor = localStorage.getItem('frontCardColor') || '#356859';
+    const backCardColor = localStorage.getItem('backCardColor') || '#4a7c68';
     const buttonColor = localStorage.getItem('buttonColor') || '#4a7c68';
 
     // Set input values
     document.getElementById('headerColorInput').value = headerColor;
     document.getElementById('backgroundColorInput').value = backgroundColor;
-    document.getElementById('popColorInput').value = popColor;
-    document.getElementById('accentColorInput').value = accentColor;
+    document.getElementById('flashCardTextColorInput').value = flashCardTextColor;
+    document.getElementById('frontCardColorInput').value = frontCardColor;
+    document.getElementById('backCardColorInput').value = backCardColor;
     document.getElementById('buttonColorInput').value = buttonColor;
 
     // Open the color picker modal
     document.getElementById('colorPickerModal').style.display = 'block';
 });
 
-
-// Close the color picker modal
 document.getElementById('closeColorPickerModal').addEventListener('click', function() {
     document.getElementById('colorPickerModal').style.display = 'none';
 });
 
-// Apply selected colors to the CSS custom properties
 document.getElementById('applyColorsBtn').addEventListener('click', function() {
     const headerColor = document.getElementById('headerColorInput').value;
     const backgroundColor = document.getElementById('backgroundColorInput').value;
-    const popColor = document.getElementById('popColorInput').value;
-    const accentColor = document.getElementById('accentColorInput').value;
+    const flashCardTextColor = document.getElementById('flashCardTextColorInput').value;
+    const frontCardColor = document.getElementById('frontCardColorInput').value;
+    const backCardColor = document.getElementById('backCardColorInput').value;
     const buttonColor = document.getElementById('buttonColorInput').value;
 
     // Set CSS variables dynamically
     document.documentElement.style.setProperty('--header-color', headerColor);
     document.documentElement.style.setProperty('--background-color', backgroundColor);
-    document.documentElement.style.setProperty('--pop-color', popColor);
-    document.documentElement.style.setProperty('--accent-color', accentColor);
+    document.documentElement.style.setProperty('--flash-card-text', flashCardTextColor);
+    document.documentElement.style.setProperty('--front-flash-card', frontCardColor);
+    document.documentElement.style.setProperty('--back-flash-card', backCardColor);
     document.documentElement.style.setProperty('--button-color', buttonColor);
 
     // Save custom colors to localStorage
-    localStorage.setItem('theme', 'custom');
+    localStorage.setItem('previousTheme', 'custom');
     localStorage.setItem('headerColor', headerColor);
     localStorage.setItem('backgroundColor', backgroundColor);
-    localStorage.setItem('popColor', popColor);
-    localStorage.setItem('accentColor', accentColor);
+    localStorage.setItem('flashCardTextColor', flashCardTextColor);
+    localStorage.setItem('frontCardColor', frontCardColor);
+    localStorage.setItem('backCardColor', backCardColor);
     localStorage.setItem('buttonColor', buttonColor);
 
     document.body.classList.add('custom');
     document.body.classList.remove('dark-mode', 'light-mode-defaults');
-
-    // Close the modal after applying colors
-    // document.getElementById('colorPickerModal').style.display = 'none';
 });
 
+// On page load, apply the saved theme
 function loadBody() {
-    const darkMode = localStorage.getItem('darkMode') === 'true'; // Retrieve dark mode status
-    const previousTheme = localStorage.getItem('previousTheme') || 'light'; // Retrieve previous theme
+    const darkMode = localStorage.getItem('darkMode') === 'true';
+    const previousTheme = localStorage.getItem('previousTheme') || 'light';
 
     if (darkMode) {
         document.body.classList.add('dark-mode');
@@ -173,15 +166,17 @@ function loadBody() {
         if (previousTheme === 'custom') {
             const headerColor = localStorage.getItem('headerColor') || '#356859';
             const backgroundColor = localStorage.getItem('backgroundColor') || '#f5f5fa';
-            const popColor = localStorage.getItem('popColor') || '#356859';
-            const accentColor = localStorage.getItem('accentColor') || '#4a7c68';
+            const flashCardTextColor = localStorage.getItem('flashCardTextColor') || '#000000';
+            const frontCardColor = localStorage.getItem('frontCardColor') || '#356859';
+            const backCardColor = localStorage.getItem('backCardColor') || '#4a7c68';
             const buttonColor = localStorage.getItem('buttonColor') || '#4a7c68';
 
             // Set custom CSS properties
             document.documentElement.style.setProperty('--header-color', headerColor);
             document.documentElement.style.setProperty('--background-color', backgroundColor);
-            document.documentElement.style.setProperty('--pop-color', popColor);
-            document.documentElement.style.setProperty('--accent-color', accentColor);
+            document.documentElement.style.setProperty('--flash-card-text', flashCardTextColor);
+            document.documentElement.style.setProperty('--front-flash-card', frontCardColor);
+            document.documentElement.style.setProperty('--back-flash-card', backCardColor);
             document.documentElement.style.setProperty('--button-color', buttonColor);
 
             // Apply 'custom' class
@@ -197,37 +192,34 @@ function loadBody() {
 
 // Toggle theme when the button is clicked
 document.getElementById('light_dark_button').addEventListener('click', function () {
-    const isDarkMode = localStorage.getItem('darkMode') === 'true'; // Retrieve current dark mode state
-    const previousTheme = localStorage.getItem('previousTheme') || 'light'; // Retrieve previous theme
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    const previousTheme = localStorage.getItem('previousTheme') || 'light';
 
     if (isDarkMode) {
-        // Switch to the previous theme (custom or light)
         localStorage.setItem('darkMode', 'false');
 
         if (previousTheme === 'custom') {
-            // Restore custom theme
             const headerColor = localStorage.getItem('headerColor') || '#356859';
             const backgroundColor = localStorage.getItem('backgroundColor') || '#f5f5fa';
-            const popColor = localStorage.getItem('popColor') || '#356859';
-            const accentColor = localStorage.getItem('accentColor') || '#4a7c68';
+            const flashCardTextColor = localStorage.getItem('flashCardTextColor') || '#000000';
+            const frontCardColor = localStorage.getItem('frontCardColor') || '#356859';
+            const backCardColor = localStorage.getItem('backCardColor') || '#4a7c68';
             const buttonColor = localStorage.getItem('buttonColor') || '#4a7c68';
 
-            // Set custom CSS properties
             document.documentElement.style.setProperty('--header-color', headerColor);
             document.documentElement.style.setProperty('--background-color', backgroundColor);
-            document.documentElement.style.setProperty('--pop-color', popColor);
-            document.documentElement.style.setProperty('--accent-color', accentColor);
+            document.documentElement.style.setProperty('--flash-card-text', flashCardTextColor);
+            document.documentElement.style.setProperty('--front-flash-card', frontCardColor);
+            document.documentElement.style.setProperty('--back-flash-card', backCardColor);
             document.documentElement.style.setProperty('--button-color', buttonColor);
 
             document.body.classList.add('custom');
             document.body.classList.remove('light-mode-defaults', 'dark-mode');
         } else {
-            // Switch to light mode defaults
             document.body.classList.add('light-mode-defaults');
             document.body.classList.remove('custom', 'dark-mode');
         }
     } else {
-        // Save the current theme (custom or light) before enabling dark mode
         const isCustom = document.body.classList.contains('custom');
         localStorage.setItem('previousTheme', isCustom ? 'custom' : 'light');
         localStorage.setItem('darkMode', 'true');
@@ -237,16 +229,22 @@ document.getElementById('light_dark_button').addEventListener('click', function 
     }
 });
 
-// Reset to default light/dark mode when the defaultColorsBtn is clicked
 document.getElementById('defaultColorsBtn').addEventListener('click', function () {
     document.body.classList.add('light-mode-defaults');
-    let currentTheme = document.body.classList.contains('light-mode-defaults') ? 'light' : 'dark';
+    let currentTheme = document.body.classList.contains('light-mode-defaults') ? 'light' : 'custom';
     document.body.classList.remove('dark-mode', 'custom');
-    localStorage.setItem('theme', currentTheme);
+    localStorage.setItem('previousTheme', currentTheme);
 
-    // Reset CSS custom properties
     document.documentElement.style.removeProperty('--background-color');
-    document.documentElement.style.removeProperty('--pop-color');
-    document.documentElement.style.removeProperty('--accent-color');
+    document.documentElement.style.removeProperty('--front-flash-card');
+    document.documentElement.style.removeProperty('--back-flash-card');
     document.documentElement.style.removeProperty('--button-color');
 });
+
+function openModal(modalId) {
+    document.getElementById(modalId).style.display = 'flex';
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+}

@@ -103,9 +103,6 @@ document.getElementById('applyColorsBtn').addEventListener('click', function() {
 
     document.body.classList.add('custom');
     document.body.classList.remove('dark-mode', 'light-mode-defaults');
-
-    // Close the modal after applying colors
-    // document.getElementById('colorPickerModal').style.display = 'none';
 });
 
 function loadBody() {

@@ -208,7 +208,7 @@ button:hover {
     display: flex;
     justify-content: right;
     align-items: center;
-    margin-bottom: 10px; /* Adjusts the spacing above the footer */
+    margin-bottom: 10px;
     margin-right: 10px;
     bottom: 30px;
     right: 0px;
@@ -297,6 +297,7 @@ button:hover {
 /* Goals Section Styles */
 #goals-section {
     position: absolute; /* Change from fixed to absolute */
+    background-color: var(--pop-color);
     top: 12%; /* Adjust spacing from the top */
     left: 1%; /* Adjust spacing from the left */
     width: 30%; /* Adjust width as needed */
@@ -334,6 +335,7 @@ button:hover {
 textarea#goal-textarea {
     flex: 1;
     padding: 0.5rem;
+    margin-left: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 1%;
     font-size: 1rem;
@@ -341,7 +343,7 @@ textarea#goal-textarea {
 }
 
 .add-goal-btn {
-    background-color: #4a7c68;
+    background-color: var(--button-color);
     color: white;
     border: none;
     border-radius: 50%;

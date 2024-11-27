@@ -28,126 +28,30 @@ button:hover {
     text-align: center;
 }
 
-#startSudokuButton, #checkButton, #hintButton {
-    padding: 10px 20px;
-    font-size: 1em;
-    background-color: #356859;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 5px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-#startSudokuButton:hover, #checkButton:hover, #hintButton:hover {
-    background-color: #006644;
-    transform: translateY(-2px);
-}
-
-.difficulty-buttons {
-    margin-bottom: 15px;
-}
-
-.difficulty-buttons button {
-    padding: 8px 12px;
-    margin: 5px;
-    background-color: #356859;
-    color: white;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.difficulty-buttons button:hover {
-    background-color: #006644;
-}
-
-#sudokuGrid {
+#gameBoard {
     display: grid;
-    grid-template-columns: repeat(9, 40px);
-    grid-gap: 2px;
-    justify-content: center;
-    margin-top: 20px;
+    gap: 2px;
 }
 
-.sudoku-cell {
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    font-size: 1.2em;
+.cell {
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #333;
+    background-color: var(--cell-color);
+    color: var(--cell-text-color);
+    border: 1px solid #999;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-.sudoku-cell:hover {
-    background-color: #eef9f1;
+.cell.revealed {
+    background-color: var(--cell-reveal-color);
+    cursor: default;
 }
 
-.sudoku-cell.active {
-    background-color: #cceeff;
-}
-
-.sudoku-cell.hint {
-    color: #ff5733;
-    font-weight: bold;
-}
-
-.sudoku-cell.highlight {
-    background-color: #379956; /* Highlight color for matching numbers */
-}
-
-.sudoku-cell.error {
-    background-color: #f93123; /* Red background for invalid placement */
-}
-
-.prefilled {
-    background-color: #ddd;
-    font-weight: bold;
-    color: #333;
-}
-
-.number-button {
-    width: 40px;
-    height: 40px;
-    margin: 0 5px;
-    font-size: 1.2em;
-    cursor: pointer;
-    background-color: #356859;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.number-button:hover {
-    background-color: #006644;
-    transform: translateY(-2px);
-}
-
-.number-button.selected {
-    background-color: #379956;
-    box-shadow: 0 0 10px #379956;
-}
-
-#numberSelector {
-    display: flex;
-    justify-content: center;
-    margin-top: 15px;
-    gap: 10px;
-}
-
-p {
-    font-size: 1.2em;
-    margin-top: 20px;
-    color: #333;
-    text-align: center;
+.cell.flagged {
+    background-color: var(--flag-color);
 }
 
 /* Light/Dark Mode Toggle Button Container */

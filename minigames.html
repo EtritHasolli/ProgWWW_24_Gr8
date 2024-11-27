@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sudoku Game | StudyMate</title>
+    <title>Minesweeper Game | StudyMate</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
     <link rel="stylesheet" href="css/minigames.css">
 </head>
@@ -11,19 +11,8 @@
     <div id="header"></div>
 
     <main>
-        <div class="game-section">
-            <div class="difficulty-buttons">
-                <button id="easyButton">Easy</button>
-                <button id="mediumButton">Medium</button>
-                <button id="hardButton">Hard</button>
-            </div>
-            <button id="startSudokuButton">Start New Game</button>
-            <button id="checkButton">Check Solution</button>
-            <button id="hintButton">Hint</button>
-            <div id="sudokuGrid"></div>
-            <div id="numberSelector"></div>
-            <p id="resultMessage"></p>
-        </div>
+        <div id="gameBoard"></div>
+        <button id="reset_button">Reset Game</button>
     </main>
 
     <div id="light_dark">
@@ -46,12 +35,20 @@
                     <label for="backgroundColorInput">- Background Color</label>
                 </div>
                 <div class="color-picker-section">
-                    <input type="color" id="popColorInput" value="#356859">
-                    <label for="popColorInput">- Timer Section Color</label>
+                    <input type="color" id="cellColorInput" value="#356859">
+                    <label for="cellColorInput">- Cell Color</label>
                 </div>
                 <div class="color-picker-section">
-                    <input type="color" id="accentColorInput" value="#4a7c68">
-                    <label for="accentColorInput">- Time Color</label>
+                    <input type="color" id="cellRevealColorInput" value="#4a7c68">
+                    <label for="cellRevealColorInput">- Revealed Cell Color</label>
+                </div>
+                <div class="color-picker-section">
+                    <input type="color" id="cellTextColorInput" value="#4a7c68">
+                    <label for="cellTextColorInput">- Cell Text Color</label>
+                </div>
+                <div class="color-picker-section">
+                    <input type="color" id="flagColorInput" value="#4a7c68">
+                    <label for="flagColorInput">- Flag Color</label>
                 </div>
                 <div class="color-picker-section">
                     <input type="color" id="buttonColorInput" value="#4a7c68">

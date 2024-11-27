@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/flash_cards_style.css">
     <title>Flash Cards</title>
 </head>
-<body onload="loadHeader(), loadFooter(), loadCards()">
+<body onload="loadHeader(), loadFooter(), loadCards(), loadBody()">
     <!-- Header Section -->
     <div id="header"></div>
 
@@ -49,12 +49,16 @@
                     <label for="backgroundColorInput">- Background Color</label>
                 </div>
                 <div class="color-picker-section">
-                    <input type="color" id="popColorInput" value="#356859">
-                    <label for="popColorInput">- Timer Section Color</label>
+                    <input type="color" id="flashCardTextColorInput" value="#356859">
+                    <label for="flashCardTextColorInput ">- Flash Card Text Color</label>
                 </div>
                 <div class="color-picker-section">
-                    <input type="color" id="accentColorInput" value="#4a7c68">
-                    <label for="accentColorInput">- Time Color</label>
+                    <input type="color" id="frontCardColorInput" value="#356859">
+                    <label for="frontCardColorInput">- Front Card Color</label>
+                </div>
+                <div class="color-picker-section">
+                    <input type="color" id="backCardColorInput" value="#4a7c68">
+                    <label for="backCardColorInput">- Back Card Color</label>
                 </div>
                 <div class="color-picker-section">
                     <input type="color" id="buttonColorInput" value="#4a7c68">

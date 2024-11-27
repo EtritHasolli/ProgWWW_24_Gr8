@@ -1,475 +1,170 @@
 const lightDark = document.getElementById('lightDark');
 const lightDarkBtn = document.getElementById('light_dark_button');
-
 const colorModal = document.getElementById('colorPickerModal')
+const gameBoard = document.getElementById('gameBoard');
+const resetButton = document.getElementById('reset_button');
+
+let columns = 16; // Changeable via user input
+let mineCount = Math.floor(columns ** 2 / 7.5);
+let board = [];
+let revealed = [];
+let flagged = [];
+let gameRunning = true;
+
+// Toggle Light/Dark Mode
+lightDarkBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+});
+
+// Initialize the game
+function initGame() {
+    board = Array(columns).fill(null).map(() => Array(columns).fill(0));
+    revealed = Array(columns).fill(null).map(() => Array(columns).fill(false));
+    flagged = Array(columns).fill(null).map(() => Array(columns).fill(false));
+    placeMines();
+    calculateNumbers();
+    renderBoard();
+}
+
+// Place mines randomly
+function placeMines() {
+    let minesPlaced = 0;
+    while (minesPlaced < mineCount) {
+        const row = Math.floor(Math.random() * columns);
+        const col = Math.floor(Math.random() * columns);
+        if (board[row][col] !== 'X') {
+            board[row][col] = 'X';
+            minesPlaced++;
+        }
+    }
+}
+
+// Calculate numbers
+function calculateNumbers() {
+    const directions = [
+        [-1, -1], [-1, 0], [-1, 1],
+        [0, -1],           [0, 1],
+        [1, -1], [1, 0], [1, 1]
+    ];
+    for (let r = 0; r < columns; r++) {
+        for (let c = 0; c < columns; c++) {
+            if (board[r][c] === 'X') continue;
+            let count = 0;
+            directions.forEach(([dr, dc]) => {
+                const nr = r + dr;
+                const nc = c + dc;
+                if (nr >= 0 && nr < columns && nc >= 0 && nc < columns && board[nr][nc] === 'X') {
+                    count++;
+                }
+            });
+            board[r][c] = count;
+        }
+    }
+}
+
+// Render the board
+function renderBoard() {
+    gameBoard.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+    gameBoard.innerHTML = '';
+    for (let r = 0; r < columns; r++) {
+        for (let c = 0; c < columns; c++) {
+            const cell = document.createElement('div');
+            cell.classList.add('cell');
+            cell.dataset.row = r;
+            cell.dataset.col = c;
+
+            if (revealed[r][c]) {
+                cell.classList.add('revealed');
+                cell.textContent = board[r][c] === 0 ? '' : board[r][c];
+            } else if (flagged[r][c]) {
+                cell.classList.add('flagged');
+            }
+
+            cell.addEventListener('click', () => revealCell(r, c));
+            cell.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                toggleFlag(r, c);
+            });
+
+            gameBoard.appendChild(cell);
+        }
+    }
+}
+
+// Reveal a cell
+function revealCell(r, c) {
+    if (!gameRunning || revealed[r][c] || flagged[r][c]) return;
+    revealed[r][c] = true;
+    if (board[r][c] === 'X') {
+        gameRunning = false;
+        alert('Game Over!');
+        return;
+    }
+    if (board[r][c] === 0) {
+        floodFill(r, c);
+    }
+    checkWin();
+    renderBoard();
+}
+
+// Toggle a flag
+function toggleFlag(r, c) {
+    if (revealed[r][c]) return;
+    flagged[r][c] = !flagged[r][c];
+    renderBoard();
+}
+
+// Flood fill for empty cells
+function floodFill(r, c) {
+    const directions = [
+        [-1, 0], [1, 0], [0, -1], [0, 1],
+        [-1, -1], [-1, 1], [1, -1], [1, 1]
+    ];
+    directions.forEach(([dr, dc]) => {
+        const nr = r + dr;
+        const nc = c + dc;
+        if (nr >= 0 && nr < columns && nc >= 0 && nc < columns && !revealed[nr][nc]) {
+            revealCell(nr, nc);
+        }
+    });
+}
+
+// Check for win
+function checkWin() {
+    let safeCells = 0;
+    for (let r = 0; r < columns; r++) {
+        for (let c = 0; c < columns; c++) {
+            if (revealed[r][c] && board[r][c] !== 'X') safeCells++;
+        }
+    }
+    if (safeCells === columns ** 2 - mineCount) {
+        gameRunning = false;
+        alert('You Win!');
+    }
+}
+
+// Reset the game
+resetButton.addEventListener('click', () => {
+    resetGame();
+});
+
+function resetGame() {
+    // Reset the game state
+    gameRunning = true;
+    board = [];
+    revealed = [];
+    flagged = [];
+    // Reinitialize the game
+    initGame();
+}
+
+// Start the game
+initGame();
+
 
 window.onclick = (event) => {
     if (event.target === colorModal) colorModal.style.display = 'none';
 }
-
-document.addEventListener("DOMContentLoaded", function() {
-    // Event listeners for difficulty buttons
-    document.getElementById('easyButton').addEventListener('click', () => setDifficulty('easy'));
-    document.getElementById('mediumButton').addEventListener('click', () => setDifficulty('medium'));
-    document.getElementById('hardButton').addEventListener('click', () => setDifficulty('hard'));
-
-    // Event listener for Start New Game button
-    document.getElementById('startSudokuButton').addEventListener('click', startNewSudoku);
-
-    // Event listener for Check Solution button
-    document.getElementById('checkButton').addEventListener('click', checkSudoku);
-
-    // Event listener for Hint button
-    document.getElementById('hintButton').addEventListener('click', giveHint);
-});
-
-let difficulty = 'medium'; // Default difficulty
-
-function setDifficulty(level) {
-    difficulty = level;
-    console.log('Difficulty set to:', level);
-    startNewSudoku(); // Start a new game whenever difficulty changes
-}
-
-function generateSudokuPuzzle(difficulty) {
-    const grid = solveSudokuGrid();
-    const preFillCounts = { easy: 36, medium: 28, hard: 22 };
-    const puzzle = grid.map(row => row.slice());
-
-    let emptyCells = 81 - preFillCounts[difficulty];
-    while (emptyCells > 0) {
-        const row = Math.floor(Math.random() * 9);
-        const col = Math.floor(Math.random() * 9);
-        if (puzzle[row][col] !== 0) {
-            puzzle[row][col] = 0;
-            emptyCells--;
-        }
-    }
-
-    return puzzle;
-}
-
-function solveSudokuGrid() {
-    const grid = Array.from({ length: 9 }, () => Array(9).fill(0));
-
-    function isSafe(grid, row, col, num) {
-        for (let i = 0; i < 9; i++) {
-            if (grid[row][i] === num || grid[i][col] === num) return false;
-        }
-        const startRow = Math.floor(row / 3) * 3;
-        const startCol = Math.floor(col / 3) * 3;
-        for (let i = 0; i < 3; i++) {
-            for (let j = 0; j < 3; j++) {
-                if (grid[startRow + i][startCol + j] === num) return false;
-            }
-        }
-        return true;
-    }
-
-    function solve(grid) {
-        for (let row = 0; row < 9; row++) {
-            for (let col = 0; col < 9; col++) {
-                if (grid[row][col] === 0) {
-                    for (let num = 1; num <= 9; num++) {
-                        if (isSafe(grid, row, col, num)) {
-                            grid[row][col] = num;
-                            if (solve(grid)) return true;
-                            grid[row][col] = 0; // Backtrack
-                        }
-                    }
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    solve(grid);
-    return grid;
-}
-
-function startNewSudoku() {
-    const sudokuGrid = document.getElementById('sudokuGrid');
-    sudokuGrid.innerHTML = '';
-
-    const grid = generateSudokuPuzzle(difficulty);
-
-    for (let i = 0; i < 9; i++) {
-        const row = document.createElement('div');
-        row.classList.add('sudoku-row');
-
-        for (let j = 0; j < 9; j++) {
-            const cell = document.createElement('div');
-            cell.classList.add('sudoku-cell');
-            if (i % 3 === 0 && i !== 0) cell.style.borderLeft = '3px solid #333';
-            if (j % 3 === 0 && j !== 0) cell.style.borderTop = '3px solid #333';
-            if (i === 8) cell.style.borderRight = '3px solid #333';
-            if (j === 8) cell.style.borderBottom = '3px solid #333';
-
-            if (grid[i][j] !== 0) {
-                cell.textContent = grid[i][j];
-                cell.classList.add('prefilled');
-            }
-
-            row.appendChild(cell);
-        }
-
-        sudokuGrid.appendChild(row);
-    }
-
-    createNumberSelector();
-}
-
-function createNumberSelector() {
-    const numberSelector = document.getElementById('numberSelector');
-    numberSelector.innerHTML = '';
-
-    for (let i = 1; i <= 9; i++) {
-        const numberButton = document.createElement('button');
-        numberButton.textContent = i;
-        numberButton.classList.add('number-button');
-        numberButton.addEventListener('click', () => selectNumber(i));
-        numberSelector.appendChild(numberButton);
-    }
-
-    const clearButton = document.createElement('button');
-    clearButton.textContent = "Clr";
-    clearButton.classList.add('number-button');
-    clearButton.addEventListener('click', () => selectNumber(null));
-    numberSelector.appendChild(clearButton);
-}
-
-let selectedNumber = null;
-
-function selectNumber(number) {
-    selectedNumber = number;
-
-    document.querySelectorAll('.number-button').forEach(button => {
-        button.classList.toggle('selected', button.textContent == number || (number === null && button.textContent === "Clr"));
-    });
-}
-
-function placeNumber(cell, row, col) {
-    if (cell.textContent == selectedNumber && !cell.classList.contains('prefilled')) {
-        cell.textContent = '';
-        cell.classList.remove('active', 'error');
-        return;
-    }
-
-    if (selectedNumber !== null && !cell.classList.contains('prefilled')) {
-        cell.textContent = selectedNumber;
-        cell.classList.add('active');
-        validateNumberPlacement(cell, row, col);
-    }
-}
-
-function validateNumberPlacement(cell, row, col) {
-    const grid = getGridValues();
-
-    if (!isSafeToPlace(grid, row, col, parseInt(cell.textContent))) {
-        cell.classList.add('error');
-    } else {
-        cell.classList.remove('error');
-    }
-}
-
-function getGridValues() {
-    const grid = [];
-    const rows = document.querySelectorAll('.sudoku-row');
-
-    rows.forEach(row => {
-        const rowData = [];
-        row.querySelectorAll('.sudoku-cell').forEach(cell => {
-            const value = cell.textContent ? parseInt(cell.textContent) : 0;
-            rowData.push(value);
-        });
-        grid.push(rowData);
-    });
-
-    return grid;
-}
-
-function checkSudoku() {
-    const grid = getGridValues();
-    const isValid = validateSudoku(grid);
-    document.getElementById('resultMessage').textContent = isValid ? 'Correct Solution!' : 'Incorrect Solution, try again.';
-}
-
-function validateSudoku(grid) {
-    for (let i = 0; i < 9; i++) {
-        if (!isValidGroup(grid[i]) || !isValidGroup(grid.map(row => row[i]))) return false;
-    }
-    for (let i = 0; i < 9; i += 3) {
-        for (let j = 0; j < 9; j += 3) {
-            const subgrid = [];
-            for (let k = 0; k < 3; k++) subgrid.push(...grid[i + k].slice(j, j + 3));
-            if (!isValidGroup(subgrid)) return false;
-        }
-    }
-    return true;
-}
-
-function isValidGroup(group) {
-    const values = group.filter(num => num > 0);
-    return new Set(values).size === values.length;
-}
-
-function giveHint() {
-    const grid = getGridValues();
-    for (let i = 0; i < 9; i++) {
-        for (let j = 0; j < 9; j++) {
-            if (grid[i][j] === 0) {
-                document.querySelectorAll('.sudoku-cell')[i * 9 + j].textContent = solveSudokuGrid()[i][j];
-                return;
-            }
-        }
-    }
-}
-
-document.getElementById('light_dark_button').addEventListener('click', function() {
-    document.body.classList.toggle('dark-mode');
-    if (lightDark.classList.contains('fa-moon-o')) {
-        lightDark.classList.replace('fa-moon-o', 'fa-sun-o');
-        lightDarkBtn.style.paddingTop = '6px';
-        lightDarkBtn.style.paddingRight = '8px';
-        lightDarkBtn.style.paddingLeft = '8px';
-        lightDarkBtn.style.paddingBottom = '6px';
-    } else {
-        lightDark.classList.replace('fa-sun-o', 'fa-moon-o');
-        lightDarkBtn.style.paddingTop = '6px';
-        lightDarkBtn.style.paddingLeft = '10px';
-        lightDarkBtn.style.paddingRight = '10px';
-        lightDarkBtn.style.paddingBottom = '6px';
-    }
-});
-
-
-/*
-document.addEventListener("DOMContentLoaded", function() {
-    // Difficulty buttons
-    document.getElementById('easyButton').addEventListener('click', () => setDifficulty('easy'));
-    document.getElementById('mediumButton').addEventListener('click', () => setDifficulty('medium'));
-    document.getElementById('hardButton').addEventListener('click', () => setDifficulty('hard'));
-
-    // Game controls
-    document.getElementById('startSudokuButton').addEventListener('click', startNewSudoku);
-    document.getElementById('checkButton').addEventListener('click', checkSudoku);
-    document.getElementById('hintButton').addEventListener('click', giveHint);
-});
-
-let difficulty = 'medium'; // Default difficulty
-
-function setDifficulty(level) {
-    difficulty = level;
-    console.log('Difficulty set to:', level);
-    startNewSudoku(); // Refresh game on difficulty change
-}
-
-function generateSudokuPuzzle(difficulty) {
-    const grid = solveSudokuGrid();
-    const preFillCounts = { easy: 36, medium: 28, hard: 22 };
-    const puzzle = grid.map(row => row.slice());
-
-    let emptyCells = 81 - preFillCounts[difficulty];
-    while (emptyCells > 0) {
-        const row = Math.floor(Math.random() * 9);
-        const col = Math.floor(Math.random() * 9);
-        if (puzzle[row][col] !== 0) {
-            puzzle[row][col] = 0;
-            emptyCells--;
-        }
-    }
-
-    return puzzle;
-}
-
-function solveSudokuGrid() {
-    const grid = Array.from({ length: 9 }, () => Array(9).fill(0));
-
-    function isSafe(grid, row, col, num) {
-        for (let i = 0; i < 9; i++) {
-            if (grid[row][i] === num || grid[i][col] === num) return false;
-        }
-        const startRow = Math.floor(row / 3) * 3;
-        const startCol = Math.floor(col / 3) * 3;
-        for (let i = 0; i < 3; i++) {
-            for (let j = 0; j < 3; j++) {
-                if (grid[startRow + i][startCol + j] === num) return false;
-            }
-        }
-        return true;
-    }
-
-    function solve(grid) {
-        for (let row = 0; row < 9; row++) {
-            for (let col = 0; col < 9; col++) {
-                if (grid[row][col] === 0) {
-                    for (let num = 1; num <= 9; num++) {
-                        if (isSafe(grid, row, col, num)) {
-                            grid[row][col] = num;
-                            if (solve(grid)) return true;
-                            grid[row][col] = 0; // Backtrack
-                        }
-                    }
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    solve(grid);
-    return grid;
-}
-
-function startNewSudoku() {
-    const sudokuGrid = document.getElementById('sudokuGrid');
-    sudokuGrid.innerHTML = '';
-
-    const grid = generateSudokuPuzzle(difficulty);
-
-    for (let i = 0; i < 9; i++) {
-        const row = document.createElement('div');
-        row.classList.add('sudoku-row');
-
-        for (let j = 0; j < 9; j++) {
-            const cell = document.createElement('div');
-            cell.classList.add('sudoku-cell');
-            cell.dataset.row = i;
-            cell.dataset.col = j;
-
-            if (grid[i][j] !== 0) {
-                cell.textContent = grid[i][j];
-                cell.classList.add('prefilled');
-            } else {
-                // Add click event for empty cells
-                cell.addEventListener('click', () => placeNumber(cell, i, j));
-            }
-
-            row.appendChild(cell);
-        }
-
-        sudokuGrid.appendChild(row);
-    }
-
-    createNumberSelector();
-}
-
-function createNumberSelector() {
-    const numberSelector = document.getElementById('numberSelector');
-    numberSelector.innerHTML = '';
-
-    for (let i = 1; i <= 9; i++) {
-        const numberButton = document.createElement('button');
-        numberButton.textContent = i;
-        numberButton.classList.add('number-button');
-        numberButton.addEventListener('click', () => selectNumber(i));
-        numberSelector.appendChild(numberButton);
-    }
-
-    const clearButton = document.createElement('button');
-    clearButton.textContent = "Clr";
-    clearButton.classList.add('number-button');
-    clearButton.addEventListener('click', () => selectNumber(null));
-    numberSelector.appendChild(clearButton);
-}
-
-let selectedNumber = null;
-
-function selectNumber(number) {
-    selectedNumber = number;
-
-    document.querySelectorAll('.number-button').forEach(button => {
-        button.classList.toggle('selected', button.textContent == number || (number === null && button.textContent === "Clr"));
-    });
-}
-
-function placeNumber(cell, row, col) {
-    if (selectedNumber === null || cell.classList.contains('prefilled')) return;
-
-    // Place or remove number
-    cell.textContent = cell.textContent == selectedNumber ? '' : selectedNumber;
-    validateNumberPlacement(cell, row, col);
-}
-
-function validateNumberPlacement(cell, row, col) {
-    const grid = getGridValues();
-    cell.classList.toggle('error', !isSafeToPlace(grid, row, col, parseInt(cell.textContent)));
-}
-
-function isSafeToPlace(grid, row, col, num) {
-    if (isNaN(num)) return true;
-
-    for (let i = 0; i < 9; i++) {
-        if (grid[row][i] === num || grid[i][col] === num) return false;
-    }
-
-    const startRow = Math.floor(row / 3) * 3;
-    const startCol = Math.floor(col / 3) * 3;
-    for (let i = 0; i < 3; i++) {
-        for (let j = 0; j < 3; j++) {
-            if (grid[startRow + i][startCol + j] === num) return false;
-        }
-    }
-
-    return true;
-}
-
-function getGridValues() {
-    const grid = [];
-    const rows = document.querySelectorAll('.sudoku-row');
-
-    rows.forEach(row => {
-        const rowData = [];
-        row.querySelectorAll('.sudoku-cell').forEach(cell => {
-            const value = cell.textContent ? parseInt(cell.textContent) : 0;
-            rowData.push(value);
-        });
-        grid.push(rowData);
-    });
-
-    return grid;
-}
-
-function checkSudoku() {
-    const grid = getGridValues();
-    const isValid = validateSudoku(grid);
-    document.getElementById('resultMessage').textContent = isValid ? 'Correct Solution!' : 'Incorrect Solution, try again.';
-}
-
-function validateSudoku(grid) {
-    for (let i = 0; i < 9; i++) {
-        if (!isValidGroup(grid[i]) || !isValidGroup(grid.map(row => row[i]))) return false;
-    }
-    for (let i = 0; i < 9; i += 3) {
-        for (let j = 0; j < 9; j += 3) {
-            const subgrid = [];
-            for (let k = 0; k < 3; k++) subgrid.push(...grid[i + k].slice(j, j + 3));
-            if (!isValidGroup(subgrid)) return false;
-        }
-    }
-    return true;
-}
-
-function isValidGroup(group) {
-    const values = group.filter(num => num > 0);
-    return new Set(values).size === values.length;
-}
-
-function giveHint() {
-    const grid = getGridValues();
-    const solution = solveSudokuGrid();
-
-    for (let i = 0; i < 9; i++) {
-        for (let j = 0; j < 9; j++) {
-            if (grid[i][j] === 0) {
-                document.querySelectorAll('.sudoku-cell')[i * 9 + j].textContent = solution[i][j];
-                return;
-            }
-        }
-    }
-}
-*/
 
 // Color picker js
 // Open the color picker modal
@@ -477,15 +172,19 @@ document.getElementById('openColorPickerBtn').addEventListener('click', function
     // Fetch colors from localStorage
     const headerColor = localStorage.getItem('headerColor') || '#356859';
     const backgroundColor = localStorage.getItem('backgroundColor') || '#f5f5fa';
-    const popColor = localStorage.getItem('popColor') || '#356859';
-    const accentColor = localStorage.getItem('accentColor') || '#4a7c68';
+    const cellColor = localStorage.getItem('cellColor') || '#356859';
+    const cellRevealColor = localStorage.getItem('cellRevealColor') || '#fff';
+    const cellTextColor = localStorage.getItem('cellTextColor') || '#2b2b2e';
+    const flagColor = localStorage.getItem('flagColor') || '#4a7c68';
     const buttonColor = localStorage.getItem('buttonColor') || '#4a7c68';
 
     // Set input values
     document.getElementById('headerColorInput').value = headerColor;
     document.getElementById('backgroundColorInput').value = backgroundColor;
-    document.getElementById('popColorInput').value = popColor;
-    document.getElementById('accentColorInput').value = accentColor;
+    document.getElementById('cellColorInput').value = cellColor;
+    document.getElementById('cellRevealColorInput').value = cellRevealColor;
+    document.getElementById('cellTextColorInput').value = cellTextColor;
+    document.getElementById('flagColorInput').value = flagColor;
     document.getElementById('buttonColorInput').value = buttonColor;
 
     // Open the color picker modal
@@ -502,23 +201,29 @@ document.getElementById('closeColorPickerModal').addEventListener('click', funct
 document.getElementById('applyColorsBtn').addEventListener('click', function() {
     const headerColor = document.getElementById('headerColorInput').value;
     const backgroundColor = document.getElementById('backgroundColorInput').value;
-    const popColor = document.getElementById('popColorInput').value;
-    const accentColor = document.getElementById('accentColorInput').value;
+    const cellColor = document.getElementById('cellColorInput').value;
+    const cellRevealColor = document.getElementById('cellRevealColorInput').value;
+    const cellTextColor = document.getElementById('cellTextColorInput').value;
+    const flagColor = document.getElementById('flagColorInput').value;
     const buttonColor = document.getElementById('buttonColorInput').value;
 
     // Set CSS variables dynamically
     document.documentElement.style.setProperty('--header-color', headerColor);
     document.documentElement.style.setProperty('--background-color', backgroundColor);
-    document.documentElement.style.setProperty('--pop-color', popColor);
-    document.documentElement.style.setProperty('--accent-color', accentColor);
+    document.documentElement.style.setProperty('--cell-color', cellColor);
+    document.documentElement.style.setProperty('--cell-reveal-color', cellRevealColor);
+    document.documentElement.style.setProperty('--cell-text-color', cellTextColor);
+    document.documentElement.style.setProperty('--flag-color', flagColor);
     document.documentElement.style.setProperty('--button-color', buttonColor);
 
     // Save custom colors to localStorage
     localStorage.setItem('theme', 'custom');
     localStorage.setItem('headerColor', headerColor);
     localStorage.setItem('backgroundColor', backgroundColor);
-    localStorage.setItem('popColor', popColor);
-    localStorage.setItem('accentColor', accentColor);
+    localStorage.setItem('cellColor', cellColor);
+    localStorage.setItem('cellRevealColor', cellRevealColor);
+    localStorage.setItem('cellTextColor', cellTextColor);
+    localStorage.setItem('flagColor', flagColor);
     localStorage.setItem('buttonColor', buttonColor);
 
     document.body.classList.add('custom');
@@ -539,15 +244,19 @@ function loadBody() {
         if (previousTheme === 'custom') {
             const headerColor = localStorage.getItem('headerColor') || '#356859';
             const backgroundColor = localStorage.getItem('backgroundColor') || '#f5f5fa';
-            const popColor = localStorage.getItem('popColor') || '#356859';
-            const accentColor = localStorage.getItem('accentColor') || '#4a7c68';
+            const cellColor = localStorage.getItem('cellColor') || '#356859';
+            const cellRevealColor = localStorage.getItem('cellRevealColor') || '#fff';
+            const cellTextColor = localStorage.getItem('cellTextColor') || '#2b2b2e';
+            const flagColor = localStorage.getItem('flagColor') || '#4a7c68';
             const buttonColor = localStorage.getItem('buttonColor') || '#4a7c68';
 
             // Set custom CSS properties
             document.documentElement.style.setProperty('--header-color', headerColor);
             document.documentElement.style.setProperty('--background-color', backgroundColor);
-            document.documentElement.style.setProperty('--pop-color', popColor);
-            document.documentElement.style.setProperty('--accent-color', accentColor);
+            document.documentElement.style.setProperty('--cell-color', cellColor);
+            document.documentElement.style.setProperty('--cell-reveal-color', cellRevealColor);
+            document.documentElement.style.setProperty('--cell-text-color', cellTextColor);
+            document.documentElement.style.setProperty('--flag-color', flagColor);
             document.documentElement.style.setProperty('--button-color', buttonColor);
 
             // Apply 'custom' class
@@ -574,15 +283,19 @@ document.getElementById('light_dark_button').addEventListener('click', function 
             // Restore custom theme
             const headerColor = localStorage.getItem('headerColor') || '#356859';
             const backgroundColor = localStorage.getItem('backgroundColor') || '#f5f5fa';
-            const popColor = localStorage.getItem('popColor') || '#356859';
-            const accentColor = localStorage.getItem('accentColor') || '#4a7c68';
+            const cellColor = localStorage.getItem('cellColor') || '#356859';
+            const cellRevealColor = localStorage.getItem('cellRevealColor') || '#fff';
+            const cellTextColor = localStorage.getItem('cellTextColor') || '#2b2b2e';
+            const flagColor = localStorage.getItem('flagColor') || '#4a7c68';
             const buttonColor = localStorage.getItem('buttonColor') || '#4a7c68';
 
             // Set custom CSS properties
             document.documentElement.style.setProperty('--header-color', headerColor);
             document.documentElement.style.setProperty('--background-color', backgroundColor);
-            document.documentElement.style.setProperty('--pop-color', popColor);
-            document.documentElement.style.setProperty('--accent-color', accentColor);
+            document.documentElement.style.setProperty('--cell-color', cellColor);
+            document.documentElement.style.setProperty('--cell-reveal-color', cellRevealColor);
+            document.documentElement.style.setProperty('--cell-text-color', cellTextColor);
+            document.documentElement.style.setProperty('--flag-color', flagColor);
             document.documentElement.style.setProperty('--button-color', buttonColor);
 
             document.body.classList.add('custom');
@@ -612,7 +325,7 @@ document.getElementById('defaultColorsBtn').addEventListener('click', function (
 
     // Reset CSS custom properties
     document.documentElement.style.removeProperty('--background-color');
-    document.documentElement.style.removeProperty('--pop-color');
-    document.documentElement.style.removeProperty('--accent-color');
+    document.documentElement.style.removeProperty('--cell-color');
+    document.documentElement.style.removeProperty('--flag-color');
     document.documentElement.style.removeProperty('--button-color');
 });

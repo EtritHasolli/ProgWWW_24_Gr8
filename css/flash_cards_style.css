@@ -42,7 +42,7 @@ main {
 #add-card-form button {
     padding: 8px 16px;
     font-size: 1em;
-    background-color: var(--primary-color);
+    background-color: var(--button-color);
     color: white;
     border: none;
     cursor: pointer;
@@ -101,12 +101,12 @@ td {
 
 .front {
     background-color: var(--front-flash-card);
-    color: white;
+    color: var(--flash-card-text);
 }
 
 .back {
     background-color: var(--back-flash-card);
-    color: white;
+    color: var(--flash-card-text);
     transform: rotateY(180deg);
 }
 
@@ -130,7 +130,7 @@ td {
 }
 
 
-.delete-btn:hover {
+.delete-btn:hover, .flashcard.flipped .delete-btn:hover {
     background-color: var(--button-hover-color);
 }
 

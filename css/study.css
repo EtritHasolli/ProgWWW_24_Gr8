@@ -95,6 +95,14 @@ button:hover {
     border-left: 1px solid var(--book-border-color); /* Left border for light mode */
 }
 
+#pageLink{
+    color: var(--book-text-color);
+}
+
+#pageLink:visited{
+    color: aqua;
+}
+
 /* Dark Mode Background and Borders */
 body.dark-mode .background_pages, 
 body.dark-mode .background_pages1, 
