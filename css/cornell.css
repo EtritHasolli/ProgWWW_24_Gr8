@@ -1,3 +1,19 @@
+/* General Reset and Body Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--background-color);
+    margin: 0;
+}
+
 main {
     flex-grow: 1;
     padding: 20px;
@@ -7,6 +23,7 @@ main {
     flex-direction: column;
 }
 
+/* Cornell Notes Styling */
 .cornell-notes {
     width: 60%;
     height: 500px;
@@ -42,6 +59,8 @@ main {
     border-top: 2px solid #ddd;
     background-color: var(--notes-background);
     text-align: left;
+    margin-top: 10px;
+    padding: 10px;
 }
 
 textarea {
@@ -55,13 +74,15 @@ textarea {
     background-color: #f9f9f9;
     color: var(--notes-text-color);
 }
-#header, #footer {
-    width: 100%;
-}
 
 textarea:focus {
     outline: none;
     background-color: #eef2f7;
+}
+
+/* Header and Footer Styling */
+#header, #footer {
+    width: 100%;
 }
 
 /* Light/Dark Mode Toggle Button */
@@ -77,10 +98,7 @@ textarea:focus {
     background-color: var(--light-dark-button-color);
     color: var(--light-dark-button-inside-color);
     border: none;
-    padding-top: 6px;
-    padding-right: 10px;
-    padding-left: 10px;
-    padding-bottom: 6px;
+    padding: 6px 10px;
     font-size: 1.5rem;
     cursor: pointer;
     border-radius: 50%;
@@ -91,8 +109,7 @@ textarea:focus {
     background-color: var(--light-dark-button-hover-color);
 }
 
-/* Color picker css */
-/* Modal styles */
+/* Color Picker Modal */
 #colorPickerModal {
     display: none; /* Hidden by default */
     position: fixed;
@@ -111,7 +128,7 @@ textarea:focus {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     flex-direction: column;
     align-self: center;
     padding: 20px;
@@ -122,8 +139,8 @@ textarea:focus {
 .color-picker-section {
     display: flex;
     align-items: center;
-    width: 100%; /* Ensure it takes full width to center-align inputs and labels */
-    justify-content: left; /* Centers each section horizontally */
+    width: 100%;
+    justify-content: left;
     margin: 10px;
 }
 
@@ -149,6 +166,77 @@ textarea:focus {
     border-radius: 5px;
 }
 
-#defaulColorsBtn:hover, #applyColorsBtn:hover, #closeColorPickerModal:hover {
+#defaultColorsBtn:hover, #applyColorsBtn:hover, #closeColorPickerModal:hover {
     background-color: var(--button-hover-color);
+}
+
+/* Responsive Styling */
+
+/* Medium screens (up to 768px) */
+@media (max-width: 768px) {
+    main {
+        padding: 10px;
+    }
+
+    .cornell-notes {
+        width: 80%;
+        height: 450px;
+    }
+
+    .notes-container {
+        height: auto;
+    }
+
+    .cue-column, .main-notes {
+        width: 100%;
+        padding: 5px;
+        border: none;
+    }
+
+    textarea {
+        font-size: 14px;
+    }
+
+    .summary {
+        font-size: 14px;
+    }
+
+    .modal-content {
+        width: 90%;
+    }
+}
+
+/* Small screens (up to 480px) */
+@media (max-width: 480px) {
+    .cornell-notes {
+        width: 90%;
+        height: auto;
+    }
+
+    .notes-container {
+        margin-top: 5px;
+    }
+
+    .cue-column, .main-notes {
+        padding: 5px;
+    }
+
+    textarea {
+        height: auto;
+        font-size: 12px;
+    }
+
+    .summary {
+        font-size: 12px;
+        padding: 5px;
+    }
+
+    #light_dark {
+        bottom: 20px;
+        right: 5px;
+    }
+
+    .modal-content {
+        width: 85%;
+    }
 }

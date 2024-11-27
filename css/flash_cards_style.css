@@ -125,10 +125,9 @@ td {
 }
 
 .flashcard.flipped .delete-btn {
-    background-color: var(--back-del-btn); /* New color when card is flipped */
+    background-color: var(--back-del-btn);
     color: white;
 }
-
 
 .delete-btn:hover, .flashcard.flipped .delete-btn:hover {
     background-color: var(--button-hover-color);
@@ -147,10 +146,7 @@ td {
     background-color: var(--light-dark-button-color);
     color: var(--light-dark-button-inside-color);
     border: none;
-    padding-top: 6px;
-    padding-right: 10px;
-    padding-left: 10px;
-    padding-bottom: 6px;
+    padding: 6px 10px;
     font-size: 1.5rem;
     cursor: pointer;
     border-radius: 50%;
@@ -162,9 +158,8 @@ td {
 }
 
 /* Color picker css */
-/* Modal styles */
 #colorPickerModal {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -192,8 +187,8 @@ td {
 .color-picker-section {
     display: flex;
     align-items: center;
-    width: 100%; /* Ensure it takes full width to center-align inputs and labels */
-    justify-content: left; /* Centers each section horizontally */
+    width: 100%;
+    justify-content: left;
     margin: 10px;
 }
 
@@ -221,4 +216,53 @@ td {
 
 #defaulColorsBtn:hover, #applyColorsBtn:hover, #closeColorPickerModal:hover {
     background-color: var(--button-hover-color);
+}
+
+/* Responsive Styling */
+
+/* Medium screens (up to 768px) */
+@media (max-width: 768px) {
+    #add-card-form {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+
+    td {
+        width: 150px;
+        height: 120px;
+    }
+
+    .flashcard {
+        font-size: 1em;
+    }
+
+    .modal-content {
+        width: 90%;
+    }
+}
+
+/* Small screens (up to 480px) */
+@media (max-width: 480px) {
+    #add-card-form input {
+        width: 150px;
+    }
+
+    td {
+        width: 100px;
+        height: 80px;
+    }
+
+    .flashcard {
+        font-size: 0.9em;
+    }
+
+    #light_dark {
+        bottom: 20px;
+        right: 2px;
+    }
+
+    .modal-content {
+        width: 80%;
+    }
 }

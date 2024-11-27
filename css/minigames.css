@@ -147,3 +147,64 @@ button:hover {
 #defaulColorsBtn:hover, #applyColorsBtn:hover, #closeColorPickerModal:hover {
     background-color: var(--button-hover-color);
 }
+
+/* Responsive Styles */
+
+/* Medium screens (up to 768px) */
+@media (max-width: 768px) {
+    main {
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    button {
+        font-size: 0.8rem;
+        padding: 8px 15px;
+    }
+
+    #gameBoard {
+        gap: 1px;
+    }
+
+    .cell {
+        width: 25px;
+        height: 25px;
+    }
+
+    #light_dark {
+        bottom: 40px;
+        right: 10px;
+    }
+}
+
+/* Small screens (up to 480px) */
+@media (max-width: 480px) {
+    main {
+        max-width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    button {
+        font-size: 0.7rem;
+        padding: 6px 10px;
+    }
+
+    #gameBoard {
+        gap: 1px;
+    }
+
+    .cell {
+        width: 20px;
+        height: 20px;
+    }
+
+    .modal-content {
+        width: 90%;
+    }
+
+    #light_dark {
+        bottom: 30px;
+        right: 5px;
+    }
+}

@@ -143,3 +143,76 @@ button:hover {
 #defaulColorsBtn:hover, #applyColorsBtn:hover, #closeColorPickerModal:hover {
     background-color: var(--button-hover-color);
 }
+
+
+/* Medium Screens (up to 768px) */
+@media (max-width: 768px) {
+    .profile-container {
+        flex-wrap: wrap; /* Allows profiles to stack if space is limited */
+        justify-content: center;
+    }
+
+    .profile {
+        margin-bottom: 20px;
+        width: auto; /* Adjusts width for smaller screens */
+    }
+
+    .modal-content {
+        width: 80%; /* Ensures the modal fits smaller screens */
+    }
+
+    button {
+        font-size: 0.85rem; /* Slightly reduces button text size */
+        padding: 8px 15px; /* Adjusts button size */
+    }
+}
+
+/* Small Screens (up to 480px) */
+@media (max-width: 480px) {
+    .profile-container {
+        flex-direction: column; /* Stacks profiles vertically */
+        align-items: center;
+    }
+
+    .profile {
+        margin: 10px 0;
+    }
+
+    #light_dark {
+        bottom: 20px; /* Adjusts the toggle button position */
+        right: 5px;
+    }
+
+    .modal-content {
+        width: 95%; /* Makes modal nearly full-width */
+    }
+
+    button {
+        font-size: 0.8rem; /* Further reduces button text size for smaller screens */
+        padding: 6px 10px;
+    }
+
+    textarea {
+        font-size: 14px; /* Adjust text area font size for readability */
+    }
+}
+
+/* Large Screens (above 1024px) */
+@media (min-width: 1024px) {
+    .profile-container {
+        justify-content: space-between; /* Resumes normal spacing for larger screens */
+    }
+
+    .profile {
+        margin: 0 60px; /* Maintains the original spacing */
+    }
+
+    button {
+        font-size: 1rem; /* Restores the original button size */
+        padding: 10px 20px;
+    }
+
+    .modal-content {
+        max-width: 400px; /* Ensures modals don't stretch too much */
+    }
+}
