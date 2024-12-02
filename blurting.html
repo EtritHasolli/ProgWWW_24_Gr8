@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minesweeper Game | StudyMate</title>
-    <link rel="stylesheet" href="css/minigames.css">
+    <title>Blurting Method | StudyMate</title>
+    <link rel="stylesheet" href="css/blurting.css">
 </head>
 <body onload="loadHeader(), loadFooter(), loadBody()">
     <div id="header"></div>
 
-    <main>
-        <div id="gameBoard"></div>
-        <button id="reset_button">Reset Game</button>
-    </main>
+    <div class="notepad">
+        <textarea id="blurtingArea" placeholder="Start writing your thoughts here..."></textarea>
+    </div>
 
     <div id="light_dark">
         <button id="light_dark_button">
@@ -33,26 +32,6 @@
                     <input type="color" id="backgroundColorInput" value="#f5f5fa">
                     <label for="backgroundColorInput">- Background Color</label>
                 </div>
-                <div class="color-picker-section">
-                    <input type="color" id="cellColorInput" value="#356859">
-                    <label for="cellColorInput">- Cell Color</label>
-                </div>
-                <div class="color-picker-section">
-                    <input type="color" id="cellRevealColorInput" value="#4a7c68">
-                    <label for="cellRevealColorInput">- Revealed Cell Color</label>
-                </div>
-                <div class="color-picker-section">
-                    <input type="color" id="cellTextColorInput" value="#4a7c68">
-                    <label for="cellTextColorInput">- Cell Text Color</label>
-                </div>
-                <div class="color-picker-section">
-                    <input type="color" id="flagColorInput" value="#4a7c68">
-                    <label for="flagColorInput">- Flag Color</label>
-                </div>
-                <div class="color-picker-section">
-                    <input type="color" id="buttonColorInput" value="#4a7c68">
-                    <label for="buttonColorInput">- Button Color</label>
-                </div>
 
                 <!-- Apply and Close buttons -->
                 <div id="colorModalBtn" class="button-container">
@@ -67,7 +46,7 @@
     <input type="color" id="colorPickerInput" style="display: none;">
 
     <div id="footer"></div>
+    <script src="js/blurting.js"></script>
     <script src="js/header_load.js"></script>
-    <script src="js/minigames.js"></script>
 </body>
 </html>

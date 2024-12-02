@@ -369,6 +369,7 @@ textarea#goal-textarea {
 }
 
 .goals-list {
+    color: var(--notes-text-color);
     list-style: none;
     padding: 0;
     margin: 0;

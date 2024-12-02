@@ -100,7 +100,7 @@ button:hover {
 }
 
 #pageLink:visited{
-    color: aqua;
+    color: var(--visited-color);
 }
 
 /* Dark Mode Background and Borders */
