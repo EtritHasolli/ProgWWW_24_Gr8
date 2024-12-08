@@ -202,22 +202,30 @@ document.getElementById('light_dark_button').addEventListener('click', function 
         if (previousTheme === 'custom') {
             const headerColor = localStorage.getItem('headerColor') || '#356859';
             const backgroundColor = localStorage.getItem('backgroundColor') || '#f5f5fa';
-            const flashCardTextColor = localStorage.getItem('flashCardTextColor') || '#000000';
-            const frontCardColor = localStorage.getItem('frontCardColor') || '#356859';
-            const backCardColor = localStorage.getItem('backCardColor') || '#4a7c68';
+            const popColor = localStorage.getItem('popColor') || '#356859';
+            const accentColor = localStorage.getItem('accentColor') || '#4a7c68';
             const buttonColor = localStorage.getItem('buttonColor') || '#4a7c68';
 
             document.documentElement.style.setProperty('--header-color', headerColor);
             document.documentElement.style.setProperty('--background-color', backgroundColor);
-            document.documentElement.style.setProperty('--flash-card-text', flashCardTextColor);
-            document.documentElement.style.setProperty('--front-flash-card', frontCardColor);
-            document.documentElement.style.setProperty('--back-flash-card', backCardColor);
+            document.documentElement.style.setProperty('--pop-color', popColor);
+            document.documentElement.style.setProperty('--accent-color', accentColor);
             document.documentElement.style.setProperty('--button-color', buttonColor);
 
             document.body.classList.add('custom');
+            lightDark.classList.replace('fa-sun-o', 'fa-moon-o');
+            lightDarkBtn.style.paddingTop = "6px";
+            lightDarkBtn.style.paddingBottom = "6px";
+            lightDarkBtn.style.paddingLeft = "11px";
+            lightDarkBtn.style.paddingRight =  "11px";
             document.body.classList.remove('light-mode-defaults', 'dark-mode');
         } else {
             document.body.classList.add('light-mode-defaults');
+            lightDark.classList.replace('fa-sun-o', 'fa-moon-o');
+            lightDarkBtn.style.paddingTop = "6px";
+            lightDarkBtn.style.paddingBottom = "6px";
+            lightDarkBtn.style.paddingLeft = "11px";
+            lightDarkBtn.style.paddingRight =  "11px";
             document.body.classList.remove('custom', 'dark-mode');
         }
     } else {
@@ -226,6 +234,11 @@ document.getElementById('light_dark_button').addEventListener('click', function 
         localStorage.setItem('darkMode', 'true');
 
         document.body.classList.add('dark-mode');
+        lightDark.classList.replace('fa-moon-o', 'fa-sun-o');
+        lightDarkBtn.style.paddingTop = "6px";
+        lightDarkBtn.style.paddingBottom = "6px";
+        lightDarkBtn.style.paddingLeft = "9px";
+        lightDarkBtn.style.paddingRight = "9px";
         document.body.classList.remove('light-mode-defaults', 'custom');
     }
 });

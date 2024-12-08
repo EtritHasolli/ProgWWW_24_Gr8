@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senet qka kan mbet</title>
+</head>
+<style>
+    body {
+        font-family: "MyCustomFont", sans-serif; /* Përdorimi i fontit në trupin e faqes */
+    }
+
+    .form-container {
+        background-color: white;
+        background-image: url('path/to/your-image.jpg'), url('path/to/your-image.jpg'); /* 2 img qfaredo */
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        background: linear-gradient(to right, #ff7e5f, #feb47b);
+        padding: 20px;
+        border-radius: 8px;
+        border-style: none;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        outline: none;
+    }
+
+    canvas {
+        border: 1px solid #000; /* Kufiri rreth canvas-it */
+        display: block;
+        margin: 20px auto;
+        background-origin: unset;
+        background: radial-gradient(circle, #ff7e5f, #feb47b);
+    }
+
+    h2 {
+        text-align: center;
+        text-decoration: none;
+        text-transform: none;
+        text-shadow: none;
+        text-wrap: nowrap;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    textarea {
+        resize: vertical;
+        height: 150px;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    ul {
+        list-style-type: circle;
+        margin-left: 20px;
+    }
+
+    li {
+        font-size: 16px;
+        color: #333;
+    }
+
+    li a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    li a:hover {
+        text-decoration: underline;
+    }
+
+    table {
+        border: 1px solid black;
+        width: 100%;
+        border-collapse: collapse;
+        border-style: dotted;
+    }
+
+    th, td {
+        padding: 10px;
+        border: 1px solid #ccc;
+        text-align: center;
+    }
+
+    .highlight {
+        background-color: lightblue;
+    }
+
+    .multi-column {
+        background-color: #f2f2f2;
+    }
+
+    a {
+        color: #4CAF50;  /* Green color */
+        text-decoration: none;  /* Removes underline */
+        font-weight: bold;  /* Makes the link text bold */
+    }
+
+    /* Style for visited links */
+    a:visited {
+        color: #bcb3b3;  /* Light gray for visited links */
+    }
+
+    /* Style for hovered links */
+    a:hover {
+        color: #007bff;  /* Blue color when hovering */
+        text-decoration: underline;  /* Underlines the link on hover */
+    }
+
+    /* Style for active links (while clicking) */
+    a:active {
+        color: #dc3545;  /* Red color when the link is clicked */
+    }
+
+    @font-face {
+        font-family: "Emri i Fontit";
+        src: url("https://example.com/fonts/myCustomFont.woff2") format("woff2"),
+            url("https://example.com/fonts/myCustomFont.woff") format("woff");
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    .rotating-text {
+        font-size: 2em;
+        font-weight: bold;
+        color: #333;
+        transform-style: preserve-3d;
+        animation: rotateAnimation 5s linear infinite; /* Infinite rotation */
+    }
+
+    @keyframes rotateAnimation {
+        0% {
+            transform: rotateX(0deg) rotateY(0deg);
+        }
+        50% {
+            transform: rotateX(180deg) rotateY(180deg);
+        }
+        100% {
+            transform: rotateX(360deg) rotateY(360deg);
+        }
+    }
+
+    /* Hover effects for rotation */
+    .rotating-text:hover {
+        transform: rotateX(45deg) rotateY(45deg); /* Rotate on both axes */
+    }
+
+    .animated-text {
+            font-size: 2em;
+            font-weight: bold;
+            color: white;
+            padding: 20px;
+            position: relative;
+            animation: backgroundMove 5s infinite; /* Apply the animation */
+        }
+
+        /* Keyframes for animation */
+        @keyframes backgroundMove {
+            0% {
+                background-color: #3498db; /* Blue */
+                left: 0;
+                top: 0;
+            }
+            25% {
+                background-color: #e74c3c; /* Red */
+                left: 20px;
+                top: 10px;
+            }
+            50% {
+                background-color: #2ecc71; /* Green */
+                left: 20px;
+                top: 0;
+            }
+            75% {
+                background-color: #f1c40f; /* Yellow */
+                left: 20px;
+                top: -10px;
+            }
+            100% {
+                background-color: #3498db; /* Back to Blue */
+                left: 0;
+                top: 0;
+            }
+        }
+
+        .multi-column {
+            columns: 3; /* Number of columns */
+            column-gap: 20px; /* Space between columns */
+            column-rule: 2px solid #3498db; /* Rule between columns */
+            background-color: #f9f9f9; /* Light background */
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .multi-column p {
+            margin: 0 0 10px;
+            line-height: 1.5;
+        }
+
+        /* Resizable Textarea */
+        .resizable-box {
+            width: 300px;
+            height: 100px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: both; /* Allows resizing in both directions */
+            overflow: auto; /* Adds scrollbars if content overflows */
+        }
+
+        /* Element with Outline Offset */
+        .outlined-box {
+            width: 200px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 2px solid #ddd;
+            outline: 3px solid #3498db; /* Creates an outline around the box */
+            outline-offset: 10px; /* Space between the outline and the border */
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #atoTeResize {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .draggable {
+            width: 200px;
+            padding: 10px;
+            margin: 10px;
+            text-align: center;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            cursor: grab;
+            position: relative;
+            top: 50px;
+            left: 50px;
+        }
+
+        .dropzone {
+            width: 300px;
+            height: 200px;
+            margin: 50px;
+            background-color: #e0f7fa;
+            border: 2px dashed #00796b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .reset-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .reset-button:hover {
+            background-color: #45a049;
+        }
+
+        .modal {
+            display: none; /* Fillimisht e fshehur */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* Background i gjysmë transparent */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .warning-message {
+            font-size: 1.5em;
+            color: #ff0000;
+        }
+</style>
+<body onload="loadHeader(), loadFooter()">
+    <div id="header"></div>
+
+    <p><i>hello</i> <b>there</b> <u>sir</u></p>
+    <address>qitu</address>
+    <mark>dikun</mark>
+    <a href="notes.txt" target="_blank">Notes</a>
+    <a href="https://www.youtube.com/" target="_blank">Youtube</a>
+    <a href="mailto:etrit.hasolli@student.uni-pr.edu">Email</a>
+
+    <ul>
+        <li>1</li>
+        <li>2</li>
+    </ul>
+    <ol style="margin-left: 20px;">
+        <li>i pari</li>
+        <li>i dyti</li>
+    </ol>
+    <ul>
+        <li>First item</li>
+        <li>Second item</li>
+        <li>Third item</li>
+    </ul>
+    <ul>
+        <li>Fruit
+          <ul>
+            <li>Apple</li>
+            <li>Banana</li>
+            <li>Cherry</li>
+          </ul>
+        </li>
+        <li>Vegetables
+          <ul>
+            <li>Carrot</li>
+            <li>Broccoli</li>
+            <li>Spinach</li>
+          </ul>
+        </li>
+      </ul>
+      <dl>
+        <dt>HTML</dt>
+        <dd>HTML stands for HyperText Markup Language. It is used to create the structure of web pages.</dd>
+      </dl>
+
+      <table cellspacing="10" cellpadding="15">
+        <thead>
+            <tr>
+                <th colspan="3" class="multi-column">Multi-Column Header</th>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>John</td>
+                <td>25</td>
+                <td class="highlight">New York</td>
+            </tr>
+            <tr>
+                <td>Jane</td>
+                <td>30</td>
+                <td>Los Angeles</td>
+            </tr>
+            <tr>
+                <td>Mike</td>
+                <td>35</td>
+                <td class="highlight">Chicago</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <input type="password" placeholder="passwordi">
+    <input type="radio">
+    <input type="checkbox">
+    <button type="submit">submit</button>
+
+    <div class="form-container">
+        <h2>Kontaktoni me Ne</h2>
+        <form action="mailto:etrit.hasolli@student.uni-pr.edu" method="POST" enctype="text/plain">
+            <div class="form-group">
+                <label for="name">Emri Juaj</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Juaj</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Mesazhi Juaj</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit">Dërgo Mesazhin</button>
+        </form>
+    </div>
+
+    <p>&Ccedil; &ccedil; &Euml; &euml;</p>
+    <!-- ose -->
+    <p>Ç ç Ë ë</p>
+
+    <canvas id="myCanvas1" width="500" height="400"></canvas>
+    <canvas id="myCanvas2" width="500" height="400"></canvas>
+    <canvas id="myCanvas3" width="500" height="400"></canvas>
+
+    <article>article</article>
+
+    <div class="rotating-text">HELLO!</div>
+    <div class="animated-text">Animation</div>
+
+    <div class="multi-column">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+        <p>Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.</p>
+        <p>Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+        <p>Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh.</p>
+        <p>Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor.</p>
+    </div>
+
+    <div id="atoTeResize">
+        <textarea class="resizable-box">You can resize this box in both directions.</textarea>
+
+        <div class="outlined-box">Outlined Box</div>
+    </div>
+
+    <div id="draggableText" class="draggable" draggable="true">Drag Me</div>
+
+    <div id="dropzone" class="dropzone">Drop Here</div>
+
+    <button id="resetButton" class="reset-button">Reset Position</button>
+
+    <section>
+        <h2>Audio Files</h2>
+        <audio controls>
+            <source src="audioVideo/Alec Benjamin - Let Me Down Slowly [Official Music Video].mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <audio controls>
+            <source src="audioVideo/Pink Sweat$ - At My Worst (Lyrics).mp3" type="audio/ogg">
+            Your browser does not support the audio element.
+        </audio>
+    
+        <h2>Video Files</h2>
+        <video controls width="400">
+            <source src="audioVideo/cat.mp4" type="video/mp4">
+            Your browser does not support the video element.
+        </video>
+        <video controls width="400">
+            <source src="audioVideo/cat.mp4" type="video/webm">
+            Your browser does not support the video element.
+        </video>
+    </section>
+
+    <form id="formId">
+        <label for="browser">Favorite Browser:</label>
+        <input list="browsers" id="browser" name="browser" autocomplete="on">
+        <datalist id="browsers">
+            <option value="Chrome">
+            <option value="Firefox">
+            <option value="Edge">
+            <option value="Safari">
+            <option value="Opera">
+        </datalist>
+    
+        <label for="age">Enter your age (10-99):</label>
+        <input type="number" id="age" name="age" min="10" max="99" pattern="\d{2}">
+    
+        <label for="range">Set Volume:</label>
+        <input type="range" id="range" name="range" min="0" max="100">
+    
+        <label for="date">Choose a Date:</label>
+        <input type="date" id="date" name="date">
+    
+        <label for="color">Pick a Color:</label>
+        <input type="color" id="color" name="color">
+    
+        <output name="result" for="range">50</output>
+    
+        <button type="submit" id="submitBtn">Submit</button>
+    </form>
+
+    <article>
+        <h2>Main Article</h2>
+        <p>This is the main content of the page.</p>
+    </article>
+
+    <h2>Vërejtja me JavaScript</h2>
+    <p>Kliko butonin për të shfaqur një vërejtje.</p>
+
+    <button id="showWarningButton">Shfaq Vërejtje</button>
+
+    <!-- Modal për vërejtjen -->
+    <div id="warningModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <p class="warning-message" id="warningMessage">Kjo është një vërejtje!</p>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+</body>
+<script src="js/header_load.js"></script>
+<script src="js/mbetja.js"></script>
+</html>

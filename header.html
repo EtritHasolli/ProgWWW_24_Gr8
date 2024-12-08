@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Header</title>
     </head>
         <style>
            /* Light Mode Colors (default) */
@@ -78,14 +78,40 @@
             nav ul li a:hover::after {
                 width: 100%; /* Expands the underline from left to right */
             }
+
+            .triangle {
+                width: 0;
+                height: 0;
+                border-left: 10px solid transparent;
+                border-right: 10px solid transparent;
+                border-bottom: 20px solid #ffffff; /* Triangle color */
+                cursor: pointer;
+            }
+
+            .square {
+                width: 20px; /* Square width */
+                height: 20px; /* Square height */
+                background-color: #ffffff; /* Square color */
+            }
+
+            /* qikjo heket se osht sa me plotsu kushtin */
+            .kot {
+                display: flex;
+                align-items: center;
+            }
         </style>
     <body>
         <header>
+            <div class="kot">
             <h1>StudyMate</h1>
+            <!-- qitu hiqet div se osht sa me i plotsu kushtet per me vizatu -->
+            <div class="triangle" id="triangle"></div>
+            <div class="square"></div>
+            </div>
             <nav>
                 <ul>
                     <li><a href="homepage.html">Home</a></li>
-                    <li><a href="study_meth.html#methods">Study Methods</a></li>
+                    <li><a href="study_meth.html">Study Methods</a></li>
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="minigames.html">Minigames</a></li>
                 </ul>

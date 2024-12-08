@@ -148,44 +148,52 @@ function loadBody() {
 
 // Toggle theme when the button is clicked
 document.getElementById('light_dark_button').addEventListener('click', function () {
-    const isDarkMode = localStorage.getItem('darkMode') === 'true'; // Retrieve current dark mode state
-    const previousTheme = localStorage.getItem('previousTheme') || 'light'; // Retrieve previous theme
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    const previousTheme = localStorage.getItem('previousTheme') || 'light';
 
     if (isDarkMode) {
-        // Switch to the previous theme (custom or light)
         localStorage.setItem('darkMode', 'false');
 
         if (previousTheme === 'custom') {
-            // Restore custom theme
             const headerColor = localStorage.getItem('headerColor') || '#356859';
             const backgroundColor = localStorage.getItem('backgroundColor') || '#f5f5fa';
-            const notesColor = localStorage.getItem('notesColor') || '#356859';
-            const titleColor = localStorage.getItem('titleColor') || '#fff';
-            const textColor = localStorage.getItem('textColor') || '#4a7c68';
+            const popColor = localStorage.getItem('popColor') || '#356859';
+            const accentColor = localStorage.getItem('accentColor') || '#4a7c68';
             const buttonColor = localStorage.getItem('buttonColor') || '#4a7c68';
 
-            // Set custom CSS properties
             document.documentElement.style.setProperty('--header-color', headerColor);
             document.documentElement.style.setProperty('--background-color', backgroundColor);
-            document.documentElement.style.setProperty('--notes-background', notesColor);
-            document.documentElement.style.setProperty('--notes-title-color', titleColor);
-            document.documentElement.style.setProperty('--notes-text-color', textColor);
+            document.documentElement.style.setProperty('--pop-color', popColor);
+            document.documentElement.style.setProperty('--accent-color', accentColor);
             document.documentElement.style.setProperty('--button-color', buttonColor);
 
             document.body.classList.add('custom');
+            lightDark.classList.replace('fa-sun-o', 'fa-moon-o');
+            lightDarkBtn.style.paddingTop = "6px";
+            lightDarkBtn.style.paddingBottom = "6px";
+            lightDarkBtn.style.paddingLeft = "11px";
+            lightDarkBtn.style.paddingRight =  "11px";
             document.body.classList.remove('light-mode-defaults', 'dark-mode');
         } else {
-            // Switch to light mode defaults
             document.body.classList.add('light-mode-defaults');
+            lightDark.classList.replace('fa-sun-o', 'fa-moon-o');
+            lightDarkBtn.style.paddingTop = "6px";
+            lightDarkBtn.style.paddingBottom = "6px";
+            lightDarkBtn.style.paddingLeft = "11px";
+            lightDarkBtn.style.paddingRight =  "11px";
             document.body.classList.remove('custom', 'dark-mode');
         }
     } else {
-        // Save the current theme (custom or light) before enabling dark mode
         const isCustom = document.body.classList.contains('custom');
         localStorage.setItem('previousTheme', isCustom ? 'custom' : 'light');
         localStorage.setItem('darkMode', 'true');
 
         document.body.classList.add('dark-mode');
+        lightDark.classList.replace('fa-moon-o', 'fa-sun-o');
+        lightDarkBtn.style.paddingTop = "6px";
+        lightDarkBtn.style.paddingBottom = "6px";
+        lightDarkBtn.style.paddingLeft = "9px";
+        lightDarkBtn.style.paddingRight = "9px";
         document.body.classList.remove('light-mode-defaults', 'custom');
     }
 });

@@ -389,9 +389,19 @@ document.getElementById('light_dark_button').addEventListener('click', function 
             document.documentElement.style.setProperty('--button-color', buttonColor);
 
             document.body.classList.add('custom');
+            lightDark.classList.replace('fa-sun-o', 'fa-moon-o');
+            lightDarkBtn.style.paddingTop = "6px";
+            lightDarkBtn.style.paddingBottom = "6px";
+            lightDarkBtn.style.paddingLeft = "11px";
+            lightDarkBtn.style.paddingRight =  "11px";
             document.body.classList.remove('light-mode-defaults', 'dark-mode');
         } else {
             document.body.classList.add('light-mode-defaults');
+            lightDark.classList.replace('fa-sun-o', 'fa-moon-o');
+            lightDarkBtn.style.paddingTop = "6px";
+            lightDarkBtn.style.paddingBottom = "6px";
+            lightDarkBtn.style.paddingLeft = "11px";
+            lightDarkBtn.style.paddingRight =  "11px";
             document.body.classList.remove('custom', 'dark-mode');
         }
     } else {
@@ -400,6 +410,11 @@ document.getElementById('light_dark_button').addEventListener('click', function 
         localStorage.setItem('darkMode', 'true');
 
         document.body.classList.add('dark-mode');
+        lightDark.classList.replace('fa-moon-o', 'fa-sun-o');
+        lightDarkBtn.style.paddingTop = "6px";
+        lightDarkBtn.style.paddingBottom = "6px";
+        lightDarkBtn.style.paddingLeft = "9px";
+        lightDarkBtn.style.paddingRight = "9px";
         document.body.classList.remove('light-mode-defaults', 'custom');
     }
 });
