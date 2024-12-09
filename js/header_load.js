@@ -7,6 +7,10 @@ function loadHeader() {
             document.getElementById('triangle').addEventListener('click', function () {
                 window.location.href = "mbetja.html"
             })
+
+            document.getElementById('square').addEventListener('click', function () {
+                window.location.href = "pjesaMbetur.html"
+            })
         })
         .catch(error => console.error('Error loading header:', error));
 }

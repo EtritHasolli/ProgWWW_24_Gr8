@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Events</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<style>
+    .box {
+        width: 100px;
+        height: 100px;
+        display: inline-block;
+        margin: 5px;
+    }
+    .red { background-color: red; }
+    .blue { background-color: blue; }
+    .green { background-color: green; }
+</style>
+<body>
+    <button id="myButton">Click Me</button>
+    <input type="text" id="myInput" placeholder="Type something">
+    <p id="text">This is some text.</p>
+
+    <div class="box red"></div>
+    <div class="box blue"></div>
+    <div class="box green"></div>
+    <p class="info">Click a box to change its size.</p>
+
+    <button id="hideBtn">Hide</button>
+    <button id="showBtn">Show</button>
+    <p id="text">This text will be hidden or shown.</p>
+
+    <button id="fadeBtn">Fade In/Out</button>
+    <button id="slideBtn">Slide Up/Down</button>
+    <div id="box" style="width:100px; height:100px; background-color:orange;"></div>
+
+    <div id="square" style="width:50px; height:50px; background-color:purple;"></div>
+    <button id="animateBtn">Animate</button>
+
+    <button id="hideTextBtn">Hide Text</button>
+    <p id="text2">This text will disappear and alert you when done!</p>
+
+    <script>
+        // Ngjarja click
+        $("#myButton").click(function () {
+            alert("Button clicked!");
+        });
+
+        // Ngjarja keydown
+        $("#myInput").keydown(function (e) {
+            console.log("You pressed: " + e.key);
+        });
+
+        // Ngjarja hover
+        $("#text").hover(
+            function () {
+                $(this).css("color", "blue");
+            },
+            function () {
+                $(this).css("color", "black");
+            }
+        );
+
+         // Selektimi me klasë
+        $(".box").click(function () {
+            $(this).css("width", "200px");
+        });
+
+        // Selektimi i një elementi të parë
+        $(".box:first").css("border", "2px solid black");
+
+        // Selektimi i një elementi me ngjyrë të veçantë
+        $(".blue").css("background-color", "lightblue");
+
+        $("#hideBtn").click(function () {
+            $("#text").hide();
+        });
+
+        $("#showBtn").click(function () {
+            $("#text").show();
+        });
+
+        $("#fadeBtn").click(function () {
+            $("#box").fadeToggle(); // Fade In/Out
+        });
+
+        $("#slideBtn").click(function () {
+            $("#box").slideToggle(); // Slide Up/Down
+        });
+
+        $("#animateBtn").click(function () {
+            $("#square").animate({
+                width: "200px",
+                height: "200px",
+                marginLeft: "50px"
+            }, 1000);
+        });
+
+        $("#hideTextBtn").click(function () {
+            $("#text2").fadeOut(1000, function () {
+                alert("Text is now hidden!");
+            });
+        });
+    </script>
+</body>
+</html>
