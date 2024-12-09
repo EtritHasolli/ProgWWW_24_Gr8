@@ -333,3 +333,16 @@ document.getElementById('defaultColorsBtn').addEventListener('click', function (
     document.documentElement.style.removeProperty('--flag-color');
     document.documentElement.style.removeProperty('--button-color');
 });
+// Get the modal and close button
+const welcomeModal = document.getElementById('welcomeModal');
+const closeWelcomeModal = document.getElementById('closeWelcomeModal');
+
+// Show the modal on page load
+window.addEventListener('load', () => {
+    welcomeModal.style.display = 'block';
+});
+
+// Close the modal when the button is clicked
+closeWelcomeModal.addEventListener('click', () => {
+    welcomeModal.style.display = 'none';
+});

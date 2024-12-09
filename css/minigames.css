@@ -176,6 +176,44 @@ button:hover {
         right: 10px;
     }
 }
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: var(--modal-bg-color, #fff);
+    color: var(--modal-text-color, #000);
+    border-radius: 10px;
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+
+#closeWelcomeModal {
+    margin-top: 20px;
+    background-color: var(--button-color, #4a7c68);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+#closeWelcomeModal:hover {
+    background-color: var(--button-hover-color, #356859);
+}
+
 
 /* Small screens (up to 480px) */
 @media (max-width: 480px) {
