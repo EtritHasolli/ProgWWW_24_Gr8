@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jQuery Events</title>
+    <title>jQuery & HTML API Example</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <style>
@@ -17,7 +17,12 @@
     .blue { background-color: blue; }
     .green { background-color: green; }
 </style>
+
 <body>
+    <!-- Go to Homepage Button -->
+    <button id="goToHomePage" onclick="location.href='homepage.html';">Go to Homepage</button>
+
+    <h1>jQuery and HTML API Example</h1>
     <button id="myButton">Click Me</button>
     <input type="text" id="myInput" placeholder="Type something">
     <p id="text">This is some text.</p>
@@ -41,18 +46,51 @@
     <button id="hideTextBtn">Hide Text</button>
     <p id="text2">This text will disappear and alert you when done!</p>
 
+    <!-- Geolocation -->
+    <h2>Geolocation Example</h2>
+    <button id="getLocation">Get My Location</button>
+    <p id="location"></p>
+
+    <h2>Web Worker Example</h2>
+    <button id="startWorker">Start Worker</button>
+    <button id="stopWorker">Stop Worker</button>
+    <p id="workerResult">Result: <span id="resultValue">0</span></p>
+
     <script>
-        // Ngjarja click
+        let worker;
+        let currentValue = 0; // Store the current value
+
+        // Start the worker
+        $("#startWorker").click(function () {
+            if (!worker) { // Only create a new worker if it doesn't exist
+                worker = new Worker("js/worker.js"); // Link to worker.js
+                worker.onmessage = function (event) {
+                    currentValue = event.data; // Update the current value
+                    $("#resultValue").text(currentValue); // Display the updated value
+                };
+            }
+        });
+
+        // Stop the worker
+        $("#stopWorker").click(function () {
+            if (worker) {
+                worker.terminate(); // Stop the worker
+                worker = null; // Reset the worker variable
+                $("#resultValue").text(currentValue); // Display the current value when stopped
+            }
+        });
+    </script>
+    
+    <script>
+        // Ngjarjet dhe efektet jQuery
         $("#myButton").click(function () {
             alert("Button clicked!");
         });
 
-        // Ngjarja keydown
         $("#myInput").keydown(function (e) {
             console.log("You pressed: " + e.key);
         });
 
-        // Ngjarja hover
         $("#text").hover(
             function () {
                 $(this).css("color", "blue");
@@ -62,15 +100,11 @@
             }
         );
 
-         // Selektimi me klasë
         $(".box").click(function () {
             $(this).css("width", "200px");
         });
 
-        // Selektimi i një elementi të parë
         $(".box:first").css("border", "2px solid black");
-
-        // Selektimi i një elementi me ngjyrë të veçantë
         $(".blue").css("background-color", "lightblue");
 
         $("#hideBtn").click(function () {
@@ -82,11 +116,11 @@
         });
 
         $("#fadeBtn").click(function () {
-            $("#box").fadeToggle(); // Fade In/Out
+            $("#box").fadeToggle();
         });
 
         $("#slideBtn").click(function () {
-            $("#box").slideToggle(); // Slide Up/Down
+            $("#box").slideToggle();
         });
 
         $("#animateBtn").click(function () {
@@ -102,6 +136,19 @@
                 alert("Text is now hidden!");
             });
         });
+
+        // Përdorimi i Geolocation
+        $("#getLocation").click(function () {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    $("#location").text("Latitude: " + position.coords.latitude + 
+                                        ", Longitude: " + position.coords.longitude);
+                });
+            } else {
+                $("#location").text("Geolocation is not supported by this browser.");
+            }
+        });
     </script>
 </body>
+<script src="js/worker.js"></script>
 </html>
