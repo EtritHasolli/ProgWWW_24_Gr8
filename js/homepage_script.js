@@ -287,7 +287,7 @@ document.getElementById('openColorPickerBtn').addEventListener('click', function
     // Fetch colors from localStorage
     const headerColor = localStorage.getItem('headerColor') || '#356859';
     const backgroundColor = localStorage.getItem('backgroundColor') || '#f5f5fa';
-    const popColor = localStorage.getItem('popColor') || '#f5f5fa';
+    const popColor = localStorage.getItem('popColor') || '#ffffff';
     const accentColor = localStorage.getItem('accentColor') || '#4a7c68';
     const buttonColor = localStorage.getItem('buttonColor') || '#4a7c68';
 
